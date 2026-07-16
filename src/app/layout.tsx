@@ -1,25 +1,21 @@
-import { Bricolage_Grotesque, Sora, JetBrains_Mono } from "next/font/google";
+import type { Metadata } from "next";
+import { DM_Sans } from "next/font/google";
 import ProtectionProvider from "@/components/ui/ProtectionProvider";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
-  variable: "--font-bricolage",
-  display: "swap",
-});
+export const metadata: Metadata = {
+  title: "Zenkai Media — Creative Growth Agency, Ahmedabad",
+  description:
+    "Zenkai Media is a creative growth agency based in Ahmedabad, India. Brand identity, video, web development, and performance marketing.",
+};
 
-const sora = Sora({
+// Site-wide display/heading font. Regular body/UI text intentionally uses
+// no webfont at all — it's set to the native "ui-sans-serif, system-ui,
+// sans-serif" stack in globals.css, so nothing needs to load for it.
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-sora",
-  display: "swap",
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-jetbrains",
+  weight: ["400", "500", "700", "800"],
+  variable: "--font-dmsans",
   display: "swap",
 });
 
@@ -29,21 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`light ${bricolage.variable} ${sora.variable} ${jetbrains.variable}`}
-    >
-      <head>
-        {/* Preconnect to Supabase storage — eliminates DNS + TCP/TLS overhead on first image */}
-        {process.env.NEXT_PUBLIC_SUPABASE_URL && (
-          <>
-            <link rel="preconnect" href={process.env.NEXT_PUBLIC_SUPABASE_URL} crossOrigin="anonymous" />
-            <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_SUPABASE_URL} />
-          </>
-        )}
-        {/* Preconnect for website screenshot service */}
-        <link rel="dns-prefetch" href="https://s0.wp.com" />
-      </head>
+    <html lang="en" className={`light ${dmSans.variable}`}>
       <body>
         {/* Runs before paint to avoid flash of wrong theme */}
         <script

@@ -1,12 +1,20 @@
 @import "tailwindcss";
 
 /* ----------------------------------------------------------------------------
-   ZENKAI MEDIA — cinematic dark theme
-   Near-black canvas, warm gold accent, film grain, vignette.
+   ZENKAI MEDIA — variables
 ---------------------------------------------------------------------------- */
 
 @theme {
-  --color-ink: #0a0a0b;
+  --bg-primary: #ebebeb;
+  --bg-secondary: #f5f5f5;
+  --text-primary: #000;
+  --text-secondary: #666;
+  --font-hostgrotesk: "HostGrotesk", sans-serif;
+  --font-dmsans: "DMSans", sans-serif;
+  --font-lacerchia: "LaCerchia", cursive;
+  --color-transition: 1s;
+
+  --color-ink: #000000;
   --color-ink-2: #111113;
   --color-panel: #16161a;
   --color-line: #26262c;
@@ -16,9 +24,19 @@
   --color-gold-soft: #ffd569;
   --color-ember: #ff6b35;
 
-  --font-display: var(--font-bricolage), serif;
-  --font-body: var(--font-sora), sans-serif;
-  --font-mono: var(--font-jetbrains), monospace;
+  --font-display: "DM Sans", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-mono: "DM Sans", sans-serif;
+
+  /* Breakpoints pinned to px so they are IMMUNE to the fluid root font-size
+     below. (Tailwind's defaults are rem — pinning to the same px thresholds
+     keeps every existing sm/md/lg/xl/2xl rule firing at the exact same
+     viewport width, but stops the fluid root from shifting them.) */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
 }
 
 :root {
@@ -28,7 +46,7 @@
 html.light {
   color-scheme: light;
   --color-ink: #faf8f5;
-  --color-ink-2: #f0ece8;
+  --color-ink-2: #f0ffffff;
   --color-panel: #e6e1db;
   --color-line: #cec8c0;
   --color-bone: #1c1916;
@@ -51,12 +69,42 @@ body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Clip horizontal overflow at BOTH the html and body level so fixed/full-bleed
+     elements can't create a phantom sideways scroll (the "side line" on mobile). */
+  overflow-x: clip;
 }
 
 body {
   min-height: 100dvh;
   position: relative;
-  overflow-x: hidden;
+  /* `clip` (not `hidden`) still prevents horizontal scroll but does NOT create
+     a scroll container, so `position: sticky` sections keep working. */
+  overflow-x: clip;
+}
+
+/* Diagonal white shine that sweeps across the approach-section icons on hover. */
+@keyframes iconShine {
+  from { transform: translateX(-130%); }
+  to { transform: translateX(130%); }
+}
+
+/* Infinite upward scroll for the testimonials column. The list is duplicated,
+   so translating up by half its height loops seamlessly. */
+@keyframes scrollUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+/* Gentle bounce for the hero scroll hint. */
+@keyframes scrollNudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* Mobile hero carousel — active segment fills over the slide's duration. */
+@keyframes growWidth {
+  from { width: 0%; }
+  to { width: 100%; }
 }
 
 /* Layered atmosphere: warm radial glows behind everything */
@@ -94,21 +142,21 @@ body::after {
   90% { transform: translate(-1%, 1%); }
 }
 
-/* Scrollbars */
+/* Hide scrollbar completely */
+
+/* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
-  height: 10px;
-  width: 10px;
+  display: none;
 }
-::-webkit-scrollbar-track {
-  background: transparent;
+
+/* Firefox */
+html {
+  scrollbar-width: none;
 }
-::-webkit-scrollbar-thumb {
-  background: #2a2a30;
-  border-radius: 999px;
-  border: 2px solid var(--color-ink);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3a3a42;
+
+/* IE / old Edge */
+body {
+  -ms-overflow-style: none;
 }
 
 ::selection {
@@ -187,4 +235,70 @@ img, video {
 /* Block print / Save as PDF */
 @media print {
   body { display: none !important; }
+}
+
+/* ----------------------------------------------------------------------------
+   Marketing homepage — monochrome section (independent of the ink/bone/gold
+   theme tokens above, which stay reserved for the admin app + old toggle).
+---------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  /* ── FLUID ROOT — the source of the site's zoom-resistance ──────────────
+     Anchored so that 1rem = 16px at a 1920px-wide viewport (0.8333vw × 1920 =
+     16). Because Tailwind's spacing + type scale is rem-based, every size on
+     the page now scales with the viewport width instead of being a fixed px.
+
+     Why this makes zoom "do nothing": browser zoom shrinks the CSS viewport by
+     the same factor it magnifies rendering (110% zoom → ~1745px viewport). A
+     vw-derived rem shrinks in lock-step, so the two cancel and on-screen sizes
+     stay put — exactly how lessestudio behaves.
+
+     Bounds: floor 13px keeps small screens / heavy zoom-in readable; ceiling
+     48px keeps invariance intact down to ~33% zoom (viewport ≈ 5800px). */
+  font-size: clamp(13px, 0.8333vw, 48px);
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 24s linear infinite;
+}
+
+/* Metallic / chrome hero centerpiece — a masked swirl filled with a moving
+   silver gradient to fake a 3D chrome render, plus a gentle float. */
+@keyframes float-3d {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-22px) rotate(5deg); }
+}
+@keyframes chrome-shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 220% 50%; }
+}
+.metallic-swirl {
+  -webkit-mask-image: url("/logo1.png");
+  mask-image: url("/logo1.png");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  background-image: linear-gradient(
+    115deg,
+    #ffffff 0%, #cfcfcf 11%, #7c7c7c 23%, #f2f2f2 37%,
+    #9c9c9c 50%, #fafafa 63%, #6d6d6d 76%, #d8d8d8 88%, #ffffff 100%
+  );
+  background-size: 220% 220%;
+  filter: drop-shadow(0 30px 55px rgba(0, 0, 0, 0.55));
+  animation: float-3d 7s ease-in-out infinite, chrome-shimmer 6s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .metallic-swirl { animation: none; }
+}
+
+.outline-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.14);
+  color: transparent;
 }

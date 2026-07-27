@@ -53,7 +53,7 @@ function ServiceCard({ service }: { service: Service }) {
         src={service.image}
         alt={service.title}
         loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-out will-change-transform group-hover:scale-105 group-hover:blur-[6px] group-hover:brightness-[0.82]"
+        className="flip-photo absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-out will-change-transform group-hover:scale-105 group-hover:blur-[6px] group-hover:brightness-[0.82]"
       />
 
       {/* Top scrim so the title stays legible on both light and dark images. */}

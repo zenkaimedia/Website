@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import ProtectionProvider from "@/components/ui/ProtectionProvider";
+import FloatingCTA from "@/components/home/FloatingCTA";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default function RootLayout({
         />
         <ProtectionProvider />
         {children}
+        <FloatingCTA />
       </body>
     </html>
   );

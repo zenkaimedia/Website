@@ -5,6 +5,9 @@ import FooterWordmark from "@/components/home/FooterWordmark";
 import PageContainer from "@/components/home/PageContainer";
 import InvertShell from "@/components/home/InvertShell";
 import ServicesOutro from "@/components/home/ServicesOutro";
+import ServicesDirectory from "@/components/home/ServicesDirectory";
+import { Arrow } from "@/components/home/Arrow";
+import { CTA_ARROW } from "@/components/home/cta";
 import { SERVICES, DotServiceIcon, type Service } from "@/components/home/services";
 
 export const metadata: Metadata = {
@@ -139,7 +142,7 @@ function CategorySection({ cat }: { cat: (typeof CATEGORIES)[number] }) {
             <img
               src={cat.image}
               alt={cat.name}
-              className="aspect-[3/2] w-full object-cover"
+              className="flip-photo aspect-[3/2] w-full object-cover"
             />
           </div>
 
@@ -200,24 +203,42 @@ export default function ServicesPage() {
 
       {/* ----------------------------------------------- OUTRO (fade-to-black) */}
       <ServicesOutro />
-      </InvertShell>
 
+      {/* Dark-by-design sections, counter-inverted so the whole page flips
+         white↔black as one unit (the double invert cancels in dark mode). */}
+      <div style={{ filter: "invert(1) hue-rotate(180deg)" }}>
       {/* -------------------------------------------------------------- CONTACT */}
-      <section id="contact" className="scroll-mt-16 bg-[#000000] py-20 md:scroll-mt-20 md:py-28">
+      <section id="contact" className="scroll-mt-16 bg-[#000000] pb-16 pt-4 md:scroll-mt-20 md:py-28">
         <PageContainer>
           <div className="overflow-hidden rounded-3xl bg-white/[0.02] ring-1 ring-white/10">
-            <div className="grid gap-10 p-8 md:grid-cols-[0.9fr_1.4fr] md:gap-16 md:p-12 lg:p-16">
+            <div className="grid gap-8 p-7 md:grid-cols-[0.9fr_1.4fr] md:gap-16 md:p-12 lg:p-16">
               <div>
                 <h2 className="font-display text-3xl font-bold leading-[1.1] text-white sm:text-4xl md:text-5xl">
                   Ready to
                   <span className="text-white/35"> get started?</span>
                 </h2>
+
+                {/* Mobile: a single "Get in touch" button instead of the form */}
+                <a
+                  href="/contact"
+                  className="group mt-8 flex items-center justify-between rounded-xl bg-white px-6 py-4 font-body text-base font-medium text-[#141414] transition-colors duration-300 hover:bg-white/90 md:hidden"
+                >
+                  Get in touch
+                  <Arrow invert className={CTA_ARROW} />
+                </a>
               </div>
-              <ContactForm />
+
+              {/* Desktop: the full form */}
+              <div className="hidden md:block">
+                <ContactForm />
+              </div>
             </div>
           </div>
         </PageContainer>
       </section>
+
+      {/* --------------------------------------------------- SERVICES DIRECTORY */}
+      <ServicesDirectory />
 
       {/* --------------------------------------------------------------- FOOTER */}
       <footer className="relative overflow-hidden bg-[#000000] pt-16 md:pt-24">
@@ -246,6 +267,8 @@ export default function ServicesPage() {
           &copy; {year} Zenkai Media &middot; Ahmedabad, India
         </PageContainer>
       </footer>
+      </div>
+      </InvertShell>
     </main>
   );
 }

@@ -69,8 +69,12 @@ body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  /* Clip horizontal overflow at BOTH the html and body level so fixed/full-bleed
-     elements can't create a phantom sideways scroll (the "side line" on mobile). */
+}
+
+html {
+  /* Clip horizontal overflow at the root too, so fixed / full-bleed elements
+     (nav, overlay) can't create a phantom sideways scroll — the "side line" on
+     mobile. `clip` (not `hidden`) leaves vertical scroll and sticky intact. */
   overflow-x: clip;
 }
 
@@ -80,6 +84,33 @@ body {
   /* `clip` (not `hidden`) still prevents horizontal scroll but does NOT create
      a scroll container, so `position: sticky` sections keep working. */
   overflow-x: clip;
+}
+
+/* ── Theme flips: keep content PHOTOS original ────────────────────────────
+   Both flip mechanisms invert whole regions of the page. Content photos tagged
+   `.flip-photo` re-apply the region's invert so it cancels on them — the photo
+   stays original while backgrounds/text still flip. Icons, arrows, wordmarks
+   and badges are NOT tagged, so they keep theming with the flip as intended.
+
+   • InvertShell pages (insights / services / article), all devices: photos sit
+     directly in the shell, so they re-apply `--sflip`. */
+.invert-shell img.flip-photo {
+  filter: var(--sflip);
+  transition: filter 900ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* • Home body (mobile only): one shell filter inverts the whole body. Photos
+     directly in the shell (services cards, showcase) re-apply `--mflip`; photos
+     inside the counter-inverted lower block re-apply `--mflip-inv`. Either way
+     the invert cancels on the photo → original, while the section still flips. */
+@media (max-width: 767px) {
+  .mflip-shell img.flip-photo {
+    filter: var(--mflip);
+    transition: filter 900ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .mflip-shell .mflip-counter img.flip-photo {
+    filter: var(--mflip-inv);
+  }
 }
 
 /* Diagonal white shine that sweeps across the approach-section icons on hover. */

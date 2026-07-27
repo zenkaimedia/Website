@@ -8,9 +8,9 @@ import { CTA_ARROW } from "./cta";
 const NAV_LINKS = [
   { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/#portfolio" },
-  { label: "About", href: "/#about" },
-  { label: "Insights", href: "/#insights" },
-  { label: "Contact", href: "/#contact" },
+  { label: "About", href: "/about" },
+  { label: "Insights", href: "/insights" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const BOOKING_URL = "https://zenkaimedia.dayschedule.com/free-discovery-call";

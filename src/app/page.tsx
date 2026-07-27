@@ -4,9 +4,11 @@ import Logo3D from "@/components/home/Logo3D";
 import MobileHero from "@/components/home/MobileHero";
 import ServicesSection from "@/components/home/ServicesSection";
 import ApproachShowcase from "@/components/home/ApproachShowcase";
+import MobileFlipProvider from "@/components/home/MobileFlip";
 import LatestWork from "@/components/home/LatestWork";
 import Testimonials from "@/components/home/Testimonials";
 import LatestNews from "@/components/home/LatestNews";
+import ServicesDirectory from "@/components/home/ServicesDirectory";
 import { Arrow } from "@/components/home/Arrow";
 import ScrollIndicator from "@/components/home/ScrollIndicator";
 import { CTA_BASE, CTA_ARROW } from "@/components/home/cta";
@@ -102,14 +104,29 @@ export default function Home() {
         <ScrollIndicator />
       </section>
 
-      {/* ------------------------------------------------------------ SERVICES */}
-      <ServicesSection />
+      {/* ------------------------------------ MOBILE WHOLE-PAGE FLIP (body)
+         On mobile the entire body below the hero flips white↔black as one unit,
+         driven by the Approach showcase image crossing mid-screen (image below →
+         white, image above → black). Light-by-design sections (Services,
+         Approach) flip with the shell; the dark-by-design sections below are
+         counter-inverted so they cancel back to normal black in dark mode. The
+         whole mechanism is mobile-only — desktop is completely unaffected. */}
+      <MobileFlipProvider>
+        {/* ------------------------------------------------------------ SERVICES */}
+        <ServicesSection />
 
-      {/* -------------------------------------------- APPROACH + GIF SHOWCASE */}
-      <ApproachShowcase />
+        {/* -------------------------------------------- APPROACH + GIF SHOWCASE */}
+        <ApproachShowcase />
 
-      {/* ---------------------------------------------------------- PORTFOLIO */}
-      <LatestWork />
+        {/* Dark-by-design sections. `mflip-counter` carries a permanent counter-
+           invert (mobile only): combined with the shell's invert it cancels to
+           normal black in dark mode, and reads WHITE while the page is light.
+           Because the single shell filter above drives the whole transition, the
+           upper and lower sections flip in perfect lock-step. Photos inside stay
+           original via globals.css (`--mflip-inv`). Desktop keeps filter:none. */}
+        <div className="mflip-counter [filter:invert(1)_hue-rotate(180deg)] md:![filter:none]">
+          {/* ---------------------------------------------------------- PORTFOLIO */}
+          <LatestWork />
 
       {/* ------------------------------------------------------------ TESTIMONIALS */}
       <Testimonials />
@@ -118,7 +135,8 @@ export default function Home() {
       <LatestNews />
 
       {/* -------------------------------------------------------------- CONTACT */}
-      <section id="contact" className="scroll-mt-16 bg-[#000000] pb-20 md:scroll-mt-20 md:pb-28">
+      {/* Hidden on mobile — the floating "Start a project" CTA covers that case */}
+      <section id="contact" className="hidden scroll-mt-16 bg-[#000000] pb-20 md:block md:scroll-mt-20 md:pb-28">
         <PageContainer>
           <div className="overflow-hidden rounded-3xl bg-white/[0.02] ring-1 ring-white/10">
             <div className="grid gap-10 p-8 md:grid-cols-[0.9fr_1.4fr] md:gap-16 md:p-12 lg:p-16">
@@ -134,6 +152,11 @@ export default function Home() {
           </div>
         </PageContainer>
       </section>
+
+      {/* -------------------------------------------------- SERVICES DIRECTORY */}
+      {/* After the contact form on desktop; on mobile the contact section is
+         hidden, so this lands directly after Latest News. */}
+      <ServicesDirectory />
 
       {/* --------------------------------------------------------------- FOOTER */}
       <footer className="relative overflow-hidden bg-[#000000] pt-16 md:pt-24">
@@ -165,6 +188,8 @@ export default function Home() {
           &copy; {year} Zenkai Media &middot; Ahmedabad, India
         </PageContainer>
       </footer>
+        </div>
+      </MobileFlipProvider>
     </main>
   );
 }

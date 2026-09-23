@@ -178,7 +178,7 @@ export default function Home() {
               {s.label}
             </a>
           ))}
-          <a href="mailto:hello@zenkaimedia.in" className="transition-colors hover:text-white">
+          <a href="mailto:workwithzenkai@gmail.com" className="transition-colors hover:text-white">
             Mail
           </a>
         </PageContainer>

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import ProtectionProvider from "@/components/ui/ProtectionProvider";
 import FloatingCTA from "@/components/home/FloatingCTA";
+import PageTransition from "@/components/ui/PageTransition";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,13 +11,13 @@ export const metadata: Metadata = {
     "Zenkai Media is a creative growth agency based in Ahmedabad, India. Brand identity, video, web development, and performance marketing.",
 };
 
-// Site-wide display/heading font. Regular body/UI text intentionally uses
-// no webfont at all — it's set to the native "ui-sans-serif, system-ui,
-// sans-serif" stack in globals.css, so nothing needs to load for it.
-const dmSans = DM_Sans({
+// Site-wide typeface (display, body, labels — see the type scale in
+// globals.css). Only the weights the scale uses: 400 body, 500 medium
+// (editorial / nav / buttons), 600 headings — `font-bold` maps to 600.
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "700", "800"],
-  variable: "--font-dmsans",
+  weight: ["400", "500", "600"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -26,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`light ${dmSans.variable}`}>
+    <html lang="en" className={`light ${inter.variable}`}>
       <body>
         {/* Runs before paint to avoid flash of wrong theme */}
         <script
@@ -35,6 +36,7 @@ export default function RootLayout({
           }}
         />
         <ProtectionProvider />
+        <PageTransition />
         {children}
         <FloatingCTA />
       </body>

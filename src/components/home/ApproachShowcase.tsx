@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useMotionTemplate } from "motion/react";
+import { motion, useScroll, useTransform, useMotionTemplate, useInView } from "motion/react";
 import PageContainer from "./PageContainer";
+import { revealLines } from "@/components/ui/PageTransitionController";
 import { useSetMobileDark } from "./MobileFlip";
 
 const GIF_URL = "/assets/portfolio/showcasegif.gif";
@@ -41,6 +42,28 @@ function glyphMask(rows: string[]): string {
 }
 
 function Heading({ dark }: { dark: boolean }) {
+  /* Masked line-by-line rise the first time the paragraph scrolls into view.
+     Hidden only from mount (so no-JS / reduced motion always see the text). */
+  const h2Ref = useRef<HTMLHeadingElement>(null);
+  const inView = useInView(h2Ref, { once: true, margin: "0px 0px -25% 0px" });
+  const pending = useRef(false);
+  useEffect(() => {
+    const el = h2Ref.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    pending.current = true;
+    el.style.visibility = "hidden";
+    return () => {
+      el.style.visibility = "";
+    };
+  }, []);
+  useEffect(() => {
+    const el = h2Ref.current;
+    if (!inView || !el || !pending.current) return;
+    pending.current = false;
+    el.style.visibility = "";
+    revealLines(el);
+  }, [inView]);
+
   return (
     <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
       <p
@@ -49,7 +72,8 @@ function Heading({ dark }: { dark: boolean }) {
         Our Approach and Values
       </p>
       <h2
-        className={`max-w-3xl font-display text-xl font-bold leading-[1.08] sm:text-2xl md:text-[2.75rem] lg:text-[2.875rem] ${THEME_T} ${dark ? "text-white" : "text-black"}`}
+        ref={h2Ref}
+        className={`max-w-3xl font-display text-xl font-medium leading-[1.08] sm:text-2xl md:text-[2.75rem] lg:text-[2.875rem] ${THEME_T} ${dark ? "text-white" : "text-black"}`}
       >
         We combine creativity, strategic ideas and technology
         <span className={`${THEME_T} ${dark ? "text-white/35" : "text-black/35"}`}>

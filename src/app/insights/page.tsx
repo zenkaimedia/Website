@@ -35,8 +35,8 @@ export default function InsightsPage() {
         <PageContainer className="pb-12 pt-32 md:pb-20 md:pt-44">
           <div className="grid gap-8 md:grid-cols-[1.6fr_1fr] md:items-start md:gap-16">
             <h1
-              className="font-display font-bold leading-[1.08] text-black"
-              style={{ fontSize: "clamp(1.9rem, 4.4vw, 3.4rem)" }}
+              className="font-display font-medium leading-[1.05] tracking-[-0.025em] text-black"
+              style={{ fontSize: "clamp(1.9rem, 4.4vw, 3.5rem)" }}
             >
               A space for ideas, perspective,{" "}
               <br className="hidden md:block" />

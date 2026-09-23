@@ -58,7 +58,7 @@ export default function AboutPage() {
           <div className="grid gap-12 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-[7rem] lg:gap-[10rem]">
             {/* Headline: 3vw, regular weight — matching the reference. */}
             <h1
-              className="font-display font-normal leading-[1.2] text-black"
+              className="font-display font-medium leading-[1.1] text-black"
               style={{ fontSize: "clamp(1.9rem, 3vw, 3.75rem)" }}
             >
               Zenkai is a creative growth agency helping

@@ -26,7 +26,7 @@ export default function ServicesOutro() {
       <div className="mx-auto w-full max-w-7xl px-5 text-center sm:px-6">
         <h2
           ref={ref}
-          className="mx-auto font-display font-bold leading-[1.1] text-[#0a0a0a]"
+          className="mx-auto font-display font-medium leading-[1.1] text-[#0a0a0a]"
           style={{ fontSize: "clamp(1.85rem, 3.5vw, 3.4rem)" }}
         >
           Crafting Thoughtful Brands and Digital

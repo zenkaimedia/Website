@@ -10,7 +10,6 @@
   --text-primary: #000;
   --text-secondary: #666;
   --font-hostgrotesk: "HostGrotesk", sans-serif;
-  --font-dmsans: "DMSans", sans-serif;
   --font-lacerchia: "LaCerchia", cursive;
   --color-transition: 1s;
 
@@ -24,9 +23,17 @@
   --color-gold-soft: #ffd569;
   --color-ember: #ff6b35;
 
-  --font-display: "DM Sans", sans-serif;
-  --font-body: "DM Sans", sans-serif;
-  --font-mono: "DM Sans", sans-serif;
+  /* ── Type system: Inter everywhere (loaded in layout.tsx: 400/500/600) ──
+     display  hero / editorial / section headings — weight 500–600, tracking
+              tightens with size (see the heading rule in @layer base)
+     body     running text — 400, normal tracking
+     mono     small caps labels / eyebrows — keep their own tracking-[…] */
+  --font-display: "Inter", "Inter Fallback", sans-serif;
+  --font-body: "Inter", "Inter Fallback", sans-serif;
+  --font-mono: "Inter", "Inter Fallback", sans-serif;
+  /* Inter reads heavier than DM Sans: headings asking for `font-bold` render
+     at semibold, the scale's top weight. */
+  --font-weight-bold: 600;
 
   /* Breakpoints pinned to px so they are IMMUNE to the fluid root font-size
      below. (Tailwind's defaults are rem — pinning to the same px thresholds
@@ -210,6 +217,15 @@ body {
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+/* Inter display tracking: 0 at body sizes, tightening with size to about
+   -0.025em at ~40px and -0.03em at 80px+ (em = the element's own size).
+   Explicit tracking-[…] utilities still win. */
+@layer base {
+  h1, h2, h3, .font-display {
+    letter-spacing: max(-0.03em, min(0px, calc((16px - 1em) * 0.04)));
+  }
 }
 
 .text-balance {

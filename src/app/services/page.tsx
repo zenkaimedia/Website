@@ -178,7 +178,7 @@ export default function ServicesPage() {
           {/* Right-offset headline + CTA */}
           <div>
             <h1
-              className="font-display font-bold leading-[1.08] text-black"
+              className="font-display font-medium leading-[1.08] text-black"
               style={{ fontSize: HERO_HEADING }}
             >
               Zenkai is a creative growth studio. We deliver brands, content &amp; digital experiences

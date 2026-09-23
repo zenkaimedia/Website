@@ -3,11 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "motion/react";
 
-/* Update these to your real figures. */
 const STATS = [
-  { end: 100, suffix: "+", label: "Projects Delivered", wide: true },
-  { end: 5, suffix: "+", label: "Years in Industry", wide: false },
-  { end: 7, suffix: "", label: "Disciplines", wide: false },
+  { end: 500, suffix: "+", label: "Projects Delivered", wide: true },
+  { end: 20, suffix: "+", label: "Industries", wide: false },
+  { end: 7, suffix: "", label: "Countries", wide: false },
 ];
 
 const DURATION = 1600; // count-up duration (ms)
@@ -34,16 +33,21 @@ function Stat({ end, suffix, label, wide }: (typeof STATS)[number]) {
   return (
     <div
       ref={ref}
-      className={`flex flex-col justify-between rounded-2xl bg-black/[0.03] p-6 ring-1 ring-black/5 md:p-8 ${
+      className={`flex flex-col justify-between overflow-hidden rounded-2xl bg-black/[0.03] p-6 ring-1 ring-black/5 ${
         wide
-          ? "col-span-2 min-h-[12rem] md:min-h-[22rem]"
+          ? "col-span-2 min-h-[12rem] md:min-h-[22rem] md:p-10"
           : "min-h-[8.5rem] md:min-h-[14rem]"
       }`}
     >
-      {/* 10vw number, matching the reference (~192px at 1920). */}
+      {/* Big on mobile; the wide "500+" runs at 10vw while the narrow cards use
+         a smaller size so 3-char numbers like "20+" always fit their column. */}
       <span
         className="font-display font-bold leading-[0.85] text-black/[0.13]"
-        style={{ fontSize: "clamp(3.25rem, 10vw, 12rem)" }}
+        style={{
+          fontSize: wide
+            ? "clamp(64px, 10vw, 192px)"
+            : "clamp(54px, 6vw, 140px)",
+        }}
       >
         {val}
         {suffix}

@@ -33,7 +33,7 @@ const TESTIMONIALS: Testimonial[] = [
   },
   {
     quote:
-      "LESSE Studio brings a rare mix of exceptional talent and true collaboration. Their design work is best-in-class, defined by sharp taste and a distinct point of view. Anastasiia has been a pleasure to work with and is a partner we're excited to keep building with.",
+      "Zenkai Media brings a rare mix of exceptional talent and true collaboration. Their design work is best-in-class, defined by sharp taste and a distinct point of view. Chandni has been a pleasure to work with and is a partner we're excited to keep building with.",
     name: "Johnny Tran",
     role: "Founder, Vora",
     initials: "JT",

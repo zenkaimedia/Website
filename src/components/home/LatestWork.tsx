@@ -74,10 +74,17 @@ function WorkCard({ work }: { work: Work }) {
   const x = useSpring(mx, springCfg);
   const y = useSpring(my, springCfg);
 
+  const pillRef = useRef<HTMLSpanElement>(null);
+
   const relative = (e: { clientX: number; clientY: number }) => {
     const rect = cardRef.current?.getBoundingClientRect();
     if (!rect) return null;
-    return { nx: e.clientX - rect.left, ny: e.clientY - rect.top };
+    // The pill may spill past the card, but never past the screen edge
+    // (the page clips overflow-x): stop it 12px short of the viewport.
+    // offsetWidth ignores the translate-x-5 (20px) offset, so add it back.
+    const pillW = (pillRef.current?.offsetWidth ?? 0) + 20;
+    const maxX = document.documentElement.clientWidth - 12 - pillW;
+    return { nx: Math.min(e.clientX, maxX) - rect.left, ny: e.clientY - rect.top };
   };
   const handleEnter = (e: { clientX: number; clientY: number }) => {
     const p = relative(e);
@@ -98,7 +105,7 @@ function WorkCard({ work }: { work: Work }) {
       variants={cardVariants}
       onMouseEnter={handleEnter}
       onMouseMove={handleMove}
-      className="group relative grid overflow-hidden rounded-[1.75rem] bg-white/[0.02] p-3 ring-1 ring-white/[0.08] transition-colors hover:ring-white/15 md:grid-cols-[0.82fr_1fr] md:grid-rows-1 md:gap-6 md:p-4 md:min-h-[31.25rem] 2xl:aspect-[2693/957] 2xl:min-h-0"
+      className="group relative grid rounded-[1.75rem] bg-white/[0.02] p-3 ring-1 ring-white/[0.08] transition-colors hover:ring-white/15 md:grid-cols-[0.82fr_1fr] md:grid-rows-1 md:gap-6 md:p-4 md:min-h-[31.25rem] 2xl:aspect-[2693/957] 2xl:min-h-0"
     >
       {/* Image — inset with rounded corners */}
       <div className="relative min-h-[18.75rem] overflow-hidden rounded-[1.25rem] md:min-h-0">
@@ -158,11 +165,12 @@ function WorkCard({ work }: { work: Work }) {
       </div>
 
       {/* Cursor-tracking "See the project" pill — follows the pointer anywhere
-          on the card, fades in on hover. */}
+          on the card, fades in on hover. The card itself must NOT clip
+          (no overflow-hidden) so the pill can spill past the card's edge. */}
       <motion.div style={{ x, y }} className="pointer-events-none absolute left-0 top-0 z-20">
         {/* Offset down-right of the pointer (not centred on it), so the cursor
            sits at the pill's top-left corner. */}
-        <span className="flex translate-x-5 translate-y-5 items-center gap-2.5 whitespace-nowrap rounded-xl bg-[#2a2a2a]/95 px-5 py-3 font-mono text-[0.75rem] font-medium uppercase tracking-[0.12em] text-white opacity-0 shadow-xl backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100">
+        <span ref={pillRef} className="flex translate-x-5 translate-y-5 items-center gap-2.5 whitespace-nowrap rounded-xl bg-[#2a2a2a]/95 px-5 py-3 font-mono text-[0.75rem] font-medium uppercase tracking-[0.12em] text-white opacity-0 shadow-xl backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100">
           See the project
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

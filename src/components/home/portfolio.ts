@@ -14,7 +14,7 @@ export type Work = {
 export const WORK: Work[] = [
   {
     title: "Airblack",
-    image: "/assets/portfolio/airblack.png",
+    image: "/assets/portfolio/airblack.webp",
     description:
       "Airblack is a skilling academy built around the belief that the right skills can create meaningful livelihoods. Our challenge was to capture the energy of learning, the credibility of industry experts, and the ambition of thousands of aspiring professionals in one cohesive visual language. The solution was a creative direction that brings together expertise, transformation, and human connection to reflect Airblack’s role in shaping the next generation of professionals.",
     location: "India",
@@ -24,7 +24,7 @@ export const WORK: Work[] = [
   },
   {
     title: "Smashed Agency",
-    image: "/assets/portfolio/smashedagency.png",
+    image: "/assets/portfolio/smashedagency.webp",
     description:
       "Smashed Agency is a performance marketing agency helping DTC brands scale through creative strategy, performance advertising, and media buying. We partnered with the team on creative production, turning performance-led concepts into platform-ready content designed for modern DTC brands.",
     location: "India",
@@ -34,7 +34,7 @@ export const WORK: Work[] = [
   },
   {
     title: "POND’S",
-    image: "/assets/portfolio/ponds.png",
+    image: "/assets/portfolio/ponds.webp",
     description:
       "POND’S is a skincare brand with a long-standing focus on beauty, skin health, and science. We developed a cinematic visual direction for the brand, translating its product identity into refined, product-led imagery through controlled lighting, elegant compositions, and soft beauty-inspired details.",
     location: "INDIA",
@@ -44,7 +44,7 @@ export const WORK: Work[] = [
   },
   {
     title: "Zudo",
-    image: "/assets/portfolio/zudoapp.png",
+    image: "/assets/portfolio/zudoapp.webp",
     description:
       "Zudo is a learning platform built around the idea of making practical skills easier to learn and apply. We worked on translating its fast-paced, creator-first learning experience into engaging digital content, combining clear storytelling, modern visuals, and short-form formats designed to make learning feel simple and accessible.",
     location: "India",

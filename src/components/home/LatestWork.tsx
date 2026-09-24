@@ -4,50 +4,7 @@ import { useRef } from "react";
 import { motion, useMotionValue, useSpring, type Variants } from "motion/react";
 import { CTA_BASE, CTA_SIMPLE } from "./cta";
 import PageContainer from "./PageContainer";
-
-type Work = {
-  title: string;
-  image: string;
-  description: string;
-  location: string;
-  industry: string;
-  /** Shown as tags on the mobile card. */
-  services: string[];
-  href: string;
-};
-
-const WORK: Work[] = [
-  {
-    title: "Duo Nutrition",
-    image: "/assets/portfolio/firstcard.webp",
-    description:
-      "Duo Nutrition is a brand that redefines pet food as a celebration of the equal, unspoken partnership between humans and their dogs. Our challenge was to translate philosophy into a logo that captures the essence of togetherness. The solution lies in the submark: a simple yet powerful oval, split evenly down the middle — two distinct halves, balanced and complementary, coming together to form a unified whole.",
-    location: "Russia",
-    industry: "Pets",
-    services: ["Branding & Design"],
-    href: "#contact",
-  },
-  {
-    title: "Everyday",
-    image: "/assets/portfolio/secondcard.webp",
-    description:
-      "Everyday Sea Moss is a premium wellness brand offering natural sea moss, rich in over 92 minerals and vitamins — designed to effortlessly support energy, immunity, and glowing skin. Our task was to create a brand identity, packaging design, web design, and photoshoot: a bright yet minimal visual language that repositions the product as modern, appealing, and seamlessly fitting into everyday life.",
-    location: "Australia",
-    industry: "Supplements",
-    services: ["Branding & Design", "Creative Production", "Web Development"],
-    href: "#contact",
-  },
-  {
-    title: "Nymph",
-    image: "/assets/portfolio/thirdcard.webp",
-    description:
-      "Nymph Haircare celebrates femininity, free spirit, and our deep connection with nature. Its philosophy is inspired by ancient Greek mythology — nymphs, the divine spirits of the natural world — translated into a modern identity, packaging, and campaign that feel both timeless and fresh.",
-    location: "Thailand",
-    industry: "Cosmetics",
-    services: ["Branding & Design", "Creative Production"],
-    href: "#contact",
-  },
-];
+import { HOME_WORK, type Work } from "./portfolio";
 
 const listVariants: Variants = {
   hidden: {},
@@ -202,13 +159,13 @@ export default function LatestWork() {
           viewport={{ once: true, amount: 0.12 }}
           className="flex flex-col gap-5 sm:gap-6"
         >
-          {WORK.map((work) => (
+          {HOME_WORK.map((work) => (
             <WorkCard key={work.title} work={work} />
           ))}
         </motion.div>
 
         <div className="mt-12 flex justify-center">
-          <a href="#contact" className={`inline-flex ${CTA_SIMPLE}`}>
+          <a href="/portfolio" className={`inline-flex ${CTA_SIMPLE}`}>
             View full portfolio
           </a>
         </div>

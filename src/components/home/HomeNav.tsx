@@ -2,14 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "motion/react";
 import { SERVICES, ServiceIcon, type Service } from "./services";
 import { Arrow } from "./Arrow";
 import { CTA_ARROW } from "./cta";
 
 const NAV_LINKS = [
   { label: "Services", href: "/services" },
-  { label: "Portfolio", href: "/#portfolio" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "About", href: "/about" },
   { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
@@ -70,22 +69,11 @@ export default function HomeNav() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileSub, setMobileSub] = useState(false); // mobile "Services" submenu
-  const [portfolioLocked, setPortfolioLocked] = useState(false); // "coming soon" cue
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const lockTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const closeMobile = () => {
     setOpen(false);
     setMobileSub(false);
-  };
-
-  // Portfolio isn't live yet — shake the pill and pop a "locked / coming soon"
-  // cue instead of navigating.
-  const showPortfolioLock = (el?: HTMLElement) => {
-    el?.animate(SHAKE_KEYFRAMES, { duration: 450, easing: "ease-in-out" });
-    setPortfolioLocked(true);
-    if (lockTimer.current) clearTimeout(lockTimer.current);
-    lockTimer.current = setTimeout(() => setPortfolioLocked(false), 1900);
   };
 
   useEffect(() => {
@@ -227,53 +215,6 @@ export default function HomeNav() {
                 >
                   {link.label}
                 </a>
-              ) : link.label === "Portfolio" ? (
-                // Locked — not live yet. Clicking shakes the pill and pops a
-                // padlock "Coming soon" cue instead of navigating.
-                <div key={link.label} className="relative flex h-full flex-1">
-                  <a
-                    href={link.href}
-                    aria-disabled="true"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      showPortfolioLock(e.currentTarget);
-                    }}
-                    className="flex h-full w-full items-center justify-center rounded-[10px] font-body text-base text-white transition-all duration-300 hover:bg-white/[0.06]"
-                  >
-                    {link.label}
-                  </a>
-
-                  <AnimatePresence>
-                    {portfolioLocked && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -6, scale: 0.85 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -4, scale: 0.9 }}
-                        transition={{ type: "spring", stiffness: 520, damping: 26 }}
-                        className="pointer-events-none absolute left-1/2 top-full z-50 mt-3 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-lg bg-[#1c1c1c] px-3 py-1.5 font-body text-xs font-medium text-white shadow-xl ring-1 ring-white/10"
-                      >
-                        <motion.svg
-                          viewBox="0 0 24 24"
-                          width="13"
-                          height="13"
-                          aria-hidden="true"
-                          animate={{ rotate: [0, -16, 13, -8, 6, 0] }}
-                          transition={{ duration: 0.5, ease: "easeInOut" }}
-                        >
-                          <rect x="5" y="10.5" width="14" height="9.5" rx="2" fill="currentColor" />
-                          <path
-                            d="M8 10.5V7.5a4 4 0 0 1 8 0v3"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.8"
-                            strokeLinecap="round"
-                          />
-                        </motion.svg>
-                        Coming soon
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
               ) : pathname === link.href ? (
                 // Current page — looks & hovers like a normal link, but clicking
                 // shakes it instead of navigating ("you're already here").
@@ -425,62 +366,16 @@ export default function HomeNav() {
                 className="h-[clamp(1.1rem,5vw,1.4rem)] w-auto object-contain"
               />
             </button>
-            {NAV_LINKS.filter((l) => l.label !== "Services").map((link) =>
-              link.label === "Portfolio" ? (
-                // Locked — not live yet. Shake the card and show a lock badge.
-                <a
-                  key={link.label}
-                  href={link.href}
-                  aria-disabled="true"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    showPortfolioLock(e.currentTarget);
-                  }}
-                  className={M_CARD_MAIN + " justify-between"}
-                >
-                  {link.label}
-                  <AnimatePresence>
-                    {portfolioLocked && (
-                      <motion.span
-                        initial={{ opacity: 0, scale: 0.7, x: 8 }}
-                        animate={{ opacity: 1, scale: 1, x: 0 }}
-                        exit={{ opacity: 0, scale: 0.8 }}
-                        transition={{ type: "spring", stiffness: 500, damping: 24 }}
-                        className="flex items-center gap-1.5 rounded-lg bg-white/[0.08] px-3 py-1.5 font-body text-[clamp(0.75rem,3.4vw,0.9rem)] font-medium text-white/70"
-                      >
-                        <motion.svg
-                          viewBox="0 0 24 24"
-                          width="15"
-                          height="15"
-                          aria-hidden="true"
-                          animate={{ rotate: [0, -16, 13, -8, 6, 0] }}
-                          transition={{ duration: 0.5, ease: "easeInOut" }}
-                        >
-                          <rect x="5" y="10.5" width="14" height="9.5" rx="2" fill="currentColor" />
-                          <path
-                            d="M8 10.5V7.5a4 4 0 0 1 8 0v3"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.8"
-                            strokeLinecap="round"
-                          />
-                        </motion.svg>
-                        Coming soon
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </a>
-              ) : (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={closeMobile}
-                  className={M_CARD_MAIN}
-                >
-                  {link.label}
-                </a>
-              )
-            )}
+            {NAV_LINKS.filter((l) => l.label !== "Services").map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={closeMobile}
+                className={M_CARD_MAIN}
+              >
+                {link.label}
+              </a>
+            ))}
 
             <a
               href={BOOKING_URL}

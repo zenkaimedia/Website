@@ -30,20 +30,20 @@ const INPUT: WorkInput[] = [
     title: "Airblack",
     image: "/assets/portfolio/airblack.webp",
     description:
-      "Airblack is a skilling academy built around the belief that the right skills can create meaningful livelihoods. Our challenge was to capture the energy of learning, the credibility of industry experts, and the ambition of thousands of aspiring professionals in one cohesive visual language. The solution was a creative direction that brings together expertise, transformation, and human connection to reflect Airblack’s role in shaping the next generation of professionals.",
+      "Airblack is a leading skilling academy helping aspiring professionals build industry-ready skills and create meaningful career opportunities. We developed a creative production approach that captures the energy of learning, the credibility of expert-led education, and the ambition of a growing community. The visual direction combines human stories, modern aesthetics, and purposeful storytelling to reflect Airblack’s role in shaping the next generation of professionals.",
     location: "India",
     industry: "EdTech",
-    services: ["Branding & Design"],
+    services: ["Creative Production"],
   },
   {
     slug: "smashed-agency",
     title: "Smashed Agency",
     image: "/assets/portfolio/smashedagency.webp",
     description:
-      "Smashed Agency is a performance marketing agency helping DTC brands scale through creative strategy, performance advertising, and media buying. We partnered with the team on creative production, turning performance-led concepts into platform-ready content designed for modern DTC brands.",
+      "Smashed Agency is a performance marketing agency helping DTC brands scale through creative strategy, performance advertising, and media buying. We worked with the team on creative production, translating performance-focused ideas into sharp, platform-ready content built to capture attention and communicate with modern DTC audiences.",
     location: "India",
     industry: "DTC / Performance Marketing",
-    services: ["Branding & Design", "Creative Production", "Web Development"],
+    services: ["Creative Production"],
   },
   {
     slug: "ponds",
@@ -60,10 +60,20 @@ const INPUT: WorkInput[] = [
     title: "Zudo App",
     image: "/assets/portfolio/zudoapp.webp",
     description:
-      "Zudo App is a learning platform built around the idea of making practical skills easier to learn and apply. We worked on translating its fast-paced, creator-first learning experience into engaging digital content, combining clear storytelling, modern visuals, and short-form formats designed to make learning feel simple and accessible.",
+      "Zudo App is a learning platform focused on making practical skills easier to learn, understand, and apply. We worked on bringing its creator-first learning experience to life through engaging digital content, combining sharp storytelling, modern visual direction, and AI-driven creative production to create content that feels simple, relevant, and built for today’s learners.",
     location: "India",
     industry: "EdTech",
-    services: ["Creative Production"],
+    services: ["Creative Production", "AI Creative Studio"],
+  },
+  {
+    slug: "ode-songs",
+    title: "Ode Songs",
+    image: "/assets/portfolio/odesongs.webp",
+    description:
+      "Ode Songs is a SaaS platform that turns personal memories and stories into original, personalized songs. We developed creative concepts and AI-led visual content to translate the emotional nature of the product into cinematic, engaging short-form experiences built for digital audiences.",
+    location: "Netherlands",
+    industry: "SaaS / AI",
+    services: ["Creative Production", "AI Creative Studio"],
   },
 ];
 

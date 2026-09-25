@@ -105,6 +105,11 @@ body {
   filter: var(--sflip);
   transition: filter 900ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+/*   Photos inside a counter-inverted region of the shell (`.sflip-counter`)
+     sit under two inverts, so they re-apply `--sflip-inv` instead. */
+.invert-shell .sflip-counter img.flip-photo {
+  filter: var(--sflip-inv);
+}
 
 /* • Home body (mobile only): one shell filter inverts the whole body. Photos
      directly in the shell (services cards, showcase) re-apply `--mflip`; photos

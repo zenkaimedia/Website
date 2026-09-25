@@ -8,6 +8,8 @@ import ServicesOutro from "@/components/home/ServicesOutro";
 import ServicesDirectory from "@/components/home/ServicesDirectory";
 import { Arrow } from "@/components/home/Arrow";
 import { DotChevron } from "@/components/home/DotIcons";
+import { serviceHref } from "@/components/home/serviceDetails";
+import { subServiceHref } from "@/components/home/subServiceDetails";
 import { CTA_ARROW } from "@/components/home/cta";
 import { SERVICES, DotServiceIcon, type Service } from "@/components/home/services";
 
@@ -80,7 +82,9 @@ function ServiceGroup({ service }: { service: Service }) {
           <DotServiceIcon name={service.icon} className="h-9 w-9 md:h-[3.5625rem] md:w-[3.5625rem]" />
         </span>
         <h3 className="font-display text-2xl font-semibold text-black md:text-[2.375rem] md:font-normal md:leading-tight">
-          {service.title}
+          <a href={serviceHref(service.title)} className="transition-colors hover:text-black/60">
+            {service.title}
+          </a>
         </h3>
         <span className="ml-auto font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-black/35">
           /{service.includes.length} services
@@ -92,7 +96,7 @@ function ServiceGroup({ service }: { service: Service }) {
         {service.includes.map((item) => (
           <li key={item}>
             <a
-              href="#contact"
+              href={subServiceHref(service.title, item)}
               className="group relative isolate flex items-center justify-between gap-4 rounded-lg border-b border-black/10 px-4 py-5 font-body text-lg text-black/65 transition-colors duration-200 hover:text-white md:h-[3.9rem] md:py-0 md:pl-[0.8125rem] md:pr-[1.5rem] md:text-[1.25rem] md:text-black/85"
             >
               {/* Black panel that grows up out of the divider on hover and

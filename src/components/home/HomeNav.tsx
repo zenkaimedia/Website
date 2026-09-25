@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { SERVICES, DotServiceIcon, type Service } from "./services";
 import { Arrow } from "./Arrow";
 import { DotCross, DotArrowDownRight, DotPhone } from "./DotIcons";
+import { serviceHref, serviceHeroImage } from "./serviceDetails";
 
 const NAV_LINKS = [
   { label: "Services", href: "/services" },
@@ -98,7 +99,7 @@ export default function HomeNav() {
   const renderServiceCard = (service: Service) => (
     <a
       key={service.title}
-      href="/services"
+      href={serviceHref(service.title)}
       onClick={() => setServicesOpen(false)}
       style={{ height: CARD_HEIGHT }}
       onMouseEnter={(e) => (e.currentTarget.style.height = CARD_HEIGHT_HOVER)}
@@ -109,7 +110,7 @@ export default function HomeNav() {
       <div
         aria-hidden="true"
         className={`absolute inset-0 scale-105 bg-cover bg-center opacity-0 transition-[opacity,transform] duration-[600ms] ${EASE} group-hover/card:scale-100 group-hover/card:opacity-100`}
-        style={{ backgroundImage: `url('${service.image}')` }}
+        style={{ backgroundImage: `url('${serviceHeroImage(service.title)}')` }}
       />
       {/* Legibility overlay */}
       <div
@@ -407,7 +408,7 @@ export default function HomeNav() {
             {SERVICES.map((s) => (
               <a
                 key={s.title}
-                href="/services"
+                href={serviceHref(s.title)}
                 onClick={closeMobile}
                 className={M_CARD}
               >

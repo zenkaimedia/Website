@@ -182,13 +182,28 @@ export function ServiceIcon({
    bitmap where "1" is a filled dot; rendered as SVG circles. Used on the
    services page headers so every icon reads as dots, matching the reference. */
 const DOT_GLYPHS: Record<ServiceIconName, string[]> = {
-  production: ["01000", "01100", "01110", "01100", "01000"], // play ▶
+  // Reference camera/box mark (8×7, 44 dots).
+  production: ["00111100", "00111100", "11111111", "11100111", "11100111", "11111111", "11111111"],
   ai: ["00100", "01110", "11111", "01110", "00100"], // spark ◆
-  social: ["11111", "11111", "11111", "01100", "00100"], // chat 💬
-  performance: ["00001", "00011", "00110", "01100", "11000"], // trend ↗
+  // Reference bow-tie mark (8×8, 28 dots).
+  social: ["10000001", "01100110", "01111110", "00100100", "00100100", "01111110", "01100110", "10000001"],
+  // Reference laptop: screen outline over a two-row base (8×6, 28 dots).
+  performance: ["01111110", "01000010", "01000010", "01000010", "11111111", "11111111"],
   influencer: ["01010", "11011", "00100", "01010", "10101"], // network
-  branding: ["00011", "00110", "01100", "11000", "10000"], // pen ✎
-  web: ["11111", "10101", "11111", "10101", "11111"], // window ▦
+  // Reference geometric mark: four diamonds around a centre (8×8, 24 dots).
+  branding: ["00011000", "00011000", "00100100", "11011011", "11011011", "00100100", "00011000", "00011000"],
+  // Reference terminal prompt ">_" (8×8, 22 dots).
+  web: ["10000000", "11000000", "01100000", "00110000", "00110000", "01100000", "11001111", "10001111"],
+};
+
+/* Dot radius as a fraction of the grid step. The 8-wide glyphs above use the
+   reference's heavier dots (≈0.44); the rest keep the original 0.35. */
+const DOT_RATIO: Partial<Record<ServiceIconName, number>> = {
+  production: 0.44,
+  social: 0.44,
+  performance: 0.44,
+  branding: 0.44,
+  web: 0.44,
 };
 
 export function DotServiceIcon({
@@ -200,11 +215,16 @@ export function DotServiceIcon({
 }) {
   const rows = DOT_GLYPHS[name];
   const step = 4;
-  const r = 1.4;
+  const r = step * (DOT_RATIO[name] ?? 0.35);
   const cols = rows[0].length;
+  // Square viewBox sized to the larger side, glyph centred in it — so an 8×6
+  // or 8×7 glyph keeps the same footprint as a square one.
+  const size = Math.max(cols, rows.length) * step;
+  const dx = (size - cols * step) / 2;
+  const dy = (size - rows.length * step) / 2;
   return (
     <svg
-      viewBox={`0 0 ${cols * step} ${rows.length * step}`}
+      viewBox={`${-dx} ${-dy} ${size} ${size}`}
       fill="currentColor"
       className={className}
       aria-hidden="true"

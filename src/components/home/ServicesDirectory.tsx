@@ -1,5 +1,7 @@
 import { SERVICES, type Service } from "./services";
 import PageContainer from "./PageContainer";
+import { serviceHref } from "./serviceDetails";
+import { subServiceHref } from "./subServiceDetails";
 
 /* Full services directory that closes the page: each category lists its service
    groups, and on desktop every group expands into its individual services.
@@ -69,7 +71,7 @@ export default function ServicesDirectory() {
                   {services.map((s) => (
                     <div key={s.title}>
                       <a
-                        href="/services"
+                        href={serviceHref(s.title)}
                         className="group inline-flex items-center gap-2 font-body text-[clamp(1.15rem,5vw,1.45rem)] leading-tight text-white/40 transition-colors hover:text-white max-md:text-[18px] max-md:leading-[28px] md:text-[1.5rem]"
                       >
                         {s.title}
@@ -81,7 +83,7 @@ export default function ServicesDirectory() {
                         {s.includes.map((item) => (
                           <li key={item}>
                             <a
-                              href="/services"
+                              href={subServiceHref(s.title, item)}
                               className="font-body text-[1.25rem] text-white/85 transition-colors hover:text-white"
                             >
                               {item}

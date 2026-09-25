@@ -55,6 +55,31 @@ export function DotArrowDownRight({ className = "" }: IconProps) {
   return <Dots viewBox="830.3 797.1 2197.5 2320.8" r={186.9} points={CORNER} className={className} />;
 }
 
+/* Service-page process steps — one 8×8 dot glyph per stage, same dot ratio as
+   the value icons (radius 0.4 of the grid step). currentColor. */
+const PROCESS_GLYPHS: string[][] = [
+  // 1 · discover — magnifier
+  ["00111100", "01111110", "11100111", "11000011", "11100111", "01111110", "00111111", "00000111"],
+  // 2 · plan — 2×2 blocks
+  ["11100111", "11100111", "11100111", "00000000", "00000000", "11100111", "11100111", "11100111"],
+  // 3 · create — diamond
+  ["00011000", "00111100", "01111110", "11111111", "11111111", "01111110", "00111100", "00011000"],
+  // 4 · launch — arrow up-right
+  ["00011111", "00000111", "00001111", "00011101", "00111001", "01110000", "11100000", "11000000"],
+];
+export function DotProcessIcon({ step, className = "" }: { step: number; className?: string }) {
+  const rows = PROCESS_GLYPHS[step % PROCESS_GLYPHS.length];
+  return (
+    <svg viewBox="0 0 80 80" aria-hidden="true" fill="currentColor" className={className}>
+      {rows.flatMap((row, y) =>
+        [...row].map((cell, x) =>
+          cell === "1" ? <circle key={`${x}-${y}`} cx={x * 10 + 5} cy={y * 10 + 5} r={4} /> : null
+        )
+      )}
+    </svg>
+  );
+}
+
 /* Telephone handset — 64 dots on a 13×13 grid, read dot-for-dot off the
    reference (receiver runs from the upper-left earpiece down to the lower-right
    mouthpiece). Reference dots are 9px on an 11.4px pitch → radius 0.394 of the

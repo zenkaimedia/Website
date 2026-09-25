@@ -12,33 +12,41 @@ const MOBILE_SHOWCASE = "/assets/portfolio/mobileshowcaseimg.webp";
 /* Shared timing for the mobile light↔dark theme flip. */
 const THEME_T = "transition-colors duration-[900ms] ease-[cubic-bezier(0.4,0,0.2,1)]";
 
-/* Dense filled dot-matrix glyphs (9-wide bitmaps) — the value marks under the
-   heading. "1" = filled dot. Each shows its value label on hover. */
-const GLYPHS: { rows: string[]; label: string }[] = [
-  { label: "made with care", rows: ["011000110", "111101111", "111111111", "111111111", "011111110", "001111100", "000111000", "000010000"] }, // heart
-  { label: "no guesswork", rows: ["110000011", "111000111", "011101110", "001111100", "000111000", "001111100", "011101110", "111000111", "110000011"] }, // x
-  { label: "calm process", rows: ["000010000", "000111000", "000111000", "001111100", "011111110", "111111111", "111111111", "011111110", "001111100"] }, // droplet
-  { label: "efficiency first", rows: ["111111111", "111111111", "011111110", "001111100", "000111000", "001111100", "011111110", "111111111", "111111111"] }, // hourglass
-  { label: "senior team", rows: ["000010000", "000111000", "001111100", "001111100", "011111110", "011101110", "111000111", "110000011", "100000001"] }, // arch
-  { label: "full ownership", rows: ["001111100", "011111110", "111000111", "110000011", "110000011", "110000011", "111000111", "011111110", "001111100"] }, // ring
+/* The six value marks under the heading — dot bitmaps read dot-for-dot off the
+   reference (8 wide; 7 or 8 rows). "1" = dot. Each shows its label on hover. */
+const GLYPHS: { name: string; rows: string[]; label: string }[] = [
+  { name: "heart", label: "made with care", rows: ["01100110", "11111111", "11111111", "11111111", "01111110", "00111100", "00011000"] },
+  { name: "cross", label: "no guesswork", rows: ["11000011", "11000011", "00100100", "00011000", "00011000", "00100100", "11000011", "11000011"] },
+  { name: "cup", label: "calm process", rows: ["00010100", "00101000", "00000000", "11111111", "11111101", "11111111", "11111100", "01111000"] },
+  { name: "hourglass", label: "efficiency first", rows: ["10000001", "01100110", "01111110", "00100100", "00100100", "01111110", "01100110", "10000001"] },
+  { name: "house", label: "senior team", rows: ["00011000", "00111100", "01111110", "11111111", "11111111", "11100111", "11100111", "11100111"] },
+  { name: "box", label: "full ownership", rows: ["00111100", "00111100", "11111111", "11100111", "11100111", "11111111", "11111111"] },
 ];
 
-/* Build a CSS mask (data-URI SVG of the dots) so we can paint the glyph with a
-   flat colour AND sweep a white shine over just the dots — no per-circle SVG. */
-function glyphMask(rows: string[]): string {
-  const step = 4;
-  const r = 1.5;
+/* Reference geometry: 14px grid, 11.2px dots (r = 0.4 × step). The viewBox is
+   the glyph's own grid, so an 8×7 glyph renders 7/8 as tall as an 8×8 one and
+   centres against it — exactly like the reference row. */
+const STEP = 14;
+const DOT_R = 5.6;
+
+function DotGlyph({ rows, className = "" }: { rows: string[]; className?: string }) {
   const cols = rows[0].length;
-  let circles = "";
-  rows.forEach((row, y) =>
-    [...row].forEach((cell, x) => {
-      if (cell === "1") {
-        circles += `<circle cx='${x * step + step / 2}' cy='${y * step + step / 2}' r='${r}'/>`;
-      }
-    })
+  return (
+    <svg
+      viewBox={`0 0 ${cols * STEP} ${rows.length * STEP}`}
+      aria-hidden="true"
+      className={className}
+      fill="currentColor"
+    >
+      {rows.flatMap((row, y) =>
+        [...row].map((cell, x) =>
+          cell === "1" ? (
+            <circle key={`${x}-${y}`} cx={x * STEP + STEP / 2} cy={y * STEP + STEP / 2} r={DOT_R} />
+          ) : null
+        )
+      )}
+    </svg>
   );
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${cols * step} ${rows.length * step}'>${circles}</svg>`;
-  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }
 
 function Heading({ dark }: { dark: boolean }) {
@@ -86,41 +94,22 @@ function Heading({ dark }: { dark: boolean }) {
 
 function Glyphs({ dark }: { dark: boolean }) {
   return (
-    <div className="mt-16 grid grid-cols-3 place-items-center gap-x-4 gap-y-12 md:mt-32 md:flex md:items-end md:justify-between md:gap-2">
-      {GLYPHS.map(({ rows, label }, i) => {
-        const mask = glyphMask(rows);
-        const maskStyle = {
-          WebkitMaskImage: mask,
-          maskImage: mask,
-          WebkitMaskRepeat: "no-repeat",
-          maskRepeat: "no-repeat",
-          WebkitMaskPosition: "center",
-          maskPosition: "center",
-          WebkitMaskSize: "contain",
-          maskSize: "contain",
-        } as const;
-        return (
-          <div key={i} className="group/icon relative flex flex-col items-center">
-            {/* Value label — fades/rises in on hover */}
-            <span className="pointer-events-none absolute top-[-5.125rem] z-10 translate-y-2 whitespace-nowrap rounded-xl bg-white px-5 py-2 font-body text-[0.8125rem] font-medium text-black opacity-0 shadow-md transition-all duration-300 group-hover/icon:translate-y-0 group-hover/icon:opacity-100">
-              {label}
-            </span>
-            {/* Icon: flat grey dots + a white 45° shine that sweeps on hover */}
-            <div
-              style={maskStyle}
-              className="relative h-8 w-8 overflow-hidden sm:h-12 sm:w-12 lg:h-14 lg:w-14 xl:h-20 xl:w-20 2xl:h-[6rem] 2xl:w-[6rem]"
-            >
-              <div
-                className={`absolute inset-0 ${THEME_T} ${dark ? "bg-white/30" : "bg-black/20"}`}
-              />
-              <div
-                style={{ transform: "translateX(-130%)" }}
-                className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,transparent_38%,rgba(255,255,255,0.95)_50%,transparent_62%)] group-hover/icon:animate-[iconShine_0.9s_ease-out]"
-              />
-            </div>
-          </div>
-        );
-      })}
+    // Desktop row per the reference: 8×14px-grid icons whose centres sit 307px
+    // apart (5.84vw icons + 10.16vw gaps), centred on the page and vertically.
+    <div className="mt-16 grid grid-cols-3 place-items-center gap-x-4 gap-y-12 md:mt-32 md:flex md:items-center md:justify-center md:gap-x-[10.16vw]">
+      {GLYPHS.map(({ name, rows, label }) => (
+        <div key={name} className="group/icon relative flex flex-col items-center">
+          {/* Value label — compact white pill 61px above the icon; fades and
+              eases up into place on hover, back out on leave. */}
+          <span className="pointer-events-none absolute bottom-[calc(100%+3.8125rem)] left-1/2 z-10 flex h-[2.875rem] -translate-x-1/2 translate-y-2 items-center whitespace-nowrap rounded-full bg-white px-[1.1875rem] font-body text-[1.0625rem] text-black opacity-0 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/icon:translate-y-0 group-hover/icon:opacity-100">
+            {label}
+          </span>
+          <DotGlyph
+            rows={rows}
+            className={`h-auto w-8 sm:w-12 md:w-[5.84vw] ${THEME_T} ${dark ? "text-white/30" : "text-[#d1d1d1]"}`}
+          />
+        </div>
+      ))}
     </div>
   );
 }

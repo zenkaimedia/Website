@@ -5,6 +5,7 @@ import { motion, useMotionValue, useSpring, type Variants } from "motion/react";
 import { CTA_BASE, CTA_SIMPLE } from "./cta";
 import PageContainer from "./PageContainer";
 import { HOME_WORK, type Work } from "./portfolio";
+import { DotChevron } from "./DotIcons";
 
 const listVariants: Variants = {
   hidden: {},
@@ -111,13 +112,7 @@ function WorkCard({ work }: { work: Work }) {
               ))}
             </div>
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/assets/general/right-arrow.png"
-            alt=""
-            aria-hidden="true"
-            className="mb-1 h-4 w-auto shrink-0 object-contain"
-          />
+          <DotChevron className="mb-1 h-4 w-auto shrink-0" />
         </div>
       </div>
 

@@ -91,10 +91,12 @@ function Card({ work }: { work: Work }) {
   );
 }
 
-export default function PortfolioGrid() {
+/** Two-column project grid. Defaults to every project; the project pages pass
+    their "Next project" pair. */
+export default function PortfolioGrid({ items = WORK }: { items?: Work[] }) {
   return (
     <div className="grid gap-y-12 md:grid-cols-2 md:gap-x-7 md:gap-y-16">
-      {WORK.map((work) => (
+      {items.map((work) => (
         <Card key={work.title} work={work} />
       ))}
     </div>

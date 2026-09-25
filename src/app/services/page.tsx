@@ -7,6 +7,7 @@ import InvertShell from "@/components/home/InvertShell";
 import ServicesOutro from "@/components/home/ServicesOutro";
 import ServicesDirectory from "@/components/home/ServicesDirectory";
 import { Arrow } from "@/components/home/Arrow";
+import { DotChevron } from "@/components/home/DotIcons";
 import { CTA_ARROW } from "@/components/home/cta";
 import { SERVICES, DotServiceIcon, type Service } from "@/components/home/services";
 
@@ -29,7 +30,8 @@ const SOCIALS = [
    fluid root and stay zoom-invariant; the vw middle keeps them fluid across
    viewports. Everything else is rem-based Tailwind, already zoom-resistant. */
 const HERO_HEADING = "clamp(2rem, 2.9vw, 3.4rem)";
-const CAT_TITLE = "clamp(2.5rem, 5.4vw, 5rem)";
+// Category title — 113px at 1920 on desktop (reference), unchanged floor on mobile.
+const CAT_TITLE = "clamp(2.5rem, 5.9vw, 7.0625rem)";
 
 /* Black pill CTA used on the light services hero (the gray CTA_BASE is for
    dark sections). Same motion/shape language as the shared CTAs. */
@@ -66,15 +68,18 @@ const CATEGORIES: {
   },
 ];
 
+/* Desktop values below are measured off the reference at 1920px and written in
+   the fluid rem (÷16): 57px faint dot icon, 38px regular heading 21px after
+   it, no header rule, 62.4px rows with 20px text inset 13px, 24px arrow. */
 function ServiceGroup({ service }: { service: Service }) {
   return (
     <div>
       {/* Header */}
-      <div className="flex items-center gap-4 border-b border-black/15 pb-5">
-        <span className="text-black/55">
-          <DotServiceIcon name={service.icon} className="h-9 w-9 md:h-10 md:w-10" />
+      <div className="flex items-center gap-4 border-b border-black/15 pb-5 md:gap-[1.3125rem] md:border-b-0 md:pb-[1.875rem]">
+        <span className="text-black/55 md:text-black/25">
+          <DotServiceIcon name={service.icon} className="h-9 w-9 md:h-[3.5625rem] md:w-[3.5625rem]" />
         </span>
-        <h3 className="font-display text-2xl font-semibold text-black md:text-[1.75rem]">
+        <h3 className="font-display text-2xl font-semibold text-black md:text-[2.375rem] md:font-normal md:leading-tight">
           {service.title}
         </h3>
         <span className="ml-auto font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-black/35">
@@ -88,18 +93,21 @@ function ServiceGroup({ service }: { service: Service }) {
           <li key={item}>
             <a
               href="#contact"
-              className="group flex items-center justify-between gap-4 rounded-lg border-b border-black/10 px-4 py-5 font-body text-lg text-black/65 transition-colors duration-300 hover:bg-black hover:text-white md:text-xl"
+              className="group relative isolate flex items-center justify-between gap-4 rounded-lg border-b border-black/10 px-4 py-5 font-body text-lg text-black/65 transition-colors duration-200 hover:text-white md:h-[3.9rem] md:py-0 md:pl-[0.8125rem] md:pr-[1.5rem] md:text-[1.25rem] md:text-black/85"
             >
-              <span>{item}</span>
-              {/* Dotted arrow — white PNG inverted to black on light rows, kept
-                 white on the black hover bar. */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/assets/general/right-arrow.png"
-                alt=""
+              {/* Black panel that grows up out of the divider on hover and
+                 sinks back into it on leave (reference: ~200ms, ease-out).
+                 -bottom-px so the filled row also covers its divider line. */}
+              <span
                 aria-hidden="true"
-                className="h-3.5 w-auto shrink-0 object-contain [filter:invert(1)] transition-all duration-300 group-hover:translate-x-1 group-hover:[filter:invert(0)]"
+                className="absolute inset-x-0 top-0 -bottom-px -z-10 origin-bottom scale-y-0 rounded-lg bg-black transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-y-100"
               />
+              <span className="transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[0.8em]">
+                {item}
+              </span>
+              {/* Dotted arrow — white dots inverted to black on light rows,
+                 back to white on the black hover panel; eases inward. */}
+              <DotChevron className="h-3.5 w-auto shrink-0 md:h-[1.5rem] [filter:invert(1)] transition-[filter,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-x-[0.8em] group-hover:[filter:invert(0)]" />
             </a>
           </li>
         ))}
@@ -118,26 +126,28 @@ function CategorySection({ cat }: { cat: (typeof CATEGORIES)[number] }) {
 
   return (
     <section>
-      <PageContainer className="py-14 md:py-20">
+      {/* Desktop: the reference's 96px (6rem) side margins and 864 : 37 : 827
+          image / gap / list split. Mobile keeps the shared container. */}
+      <div className="mx-auto w-full max-w-[108.125rem] px-5 py-14 sm:px-6 md:max-w-none md:px-[6rem] md:py-20">
         {/* Top band: giant faded category title (left) + muted description (right) */}
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-16">
           <h2
-            className="flex items-start gap-3 font-display font-bold leading-none text-black/[0.13]"
+            className="flex items-start gap-3 font-display font-bold leading-none text-black/[0.13] md:gap-[1.25rem] md:pl-[0.25rem] md:font-medium md:text-black/[0.1]"
             style={{ fontSize: CAT_TITLE }}
           >
             {cat.name}
-            <span className="mt-2 inline-grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-black/[0.06] font-mono text-sm font-medium text-black/40 md:h-9 md:w-9">
+            <span className="mt-2 inline-grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-black/[0.06] font-mono text-sm font-medium text-black/40 md:mt-[1.8rem] md:h-[2.375rem] md:w-[2.4375rem] md:rounded-[0.4375rem] md:text-[1.125rem] md:font-normal md:tracking-normal">
               {total}
             </span>
           </h2>
-          <p className="max-w-md font-body text-sm leading-relaxed text-black/45 md:pt-3 md:text-right">
+          <p className="max-w-md font-body text-sm leading-relaxed text-black/45 md:mr-[0.75rem] md:mt-[0.3rem] md:max-w-[26.25rem] md:text-[1.1875rem] md:leading-[1.1] md:text-black/35">
             {cat.description}
           </p>
         </div>
 
         {/* Body: image (left, static — scrolls with the page) + service groups (right) */}
-        <div className="mt-6 grid gap-10 md:mt-8 md:grid-cols-[minmax(0,0.85fr)_1.15fr] md:items-start md:gap-16">
-          <div className="overflow-hidden rounded-2xl">
+        <div className="mt-6 grid gap-10 md:mt-[0.7rem] md:grid-cols-[minmax(0,864fr)_minmax(0,827fr)] md:items-start md:gap-[2.3125rem]">
+          <div className="overflow-hidden rounded-2xl md:rounded-[1.25rem]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={cat.image}
@@ -146,13 +156,13 @@ function CategorySection({ cat }: { cat: (typeof CATEGORIES)[number] }) {
             />
           </div>
 
-          <div className="flex flex-col gap-12 md:gap-16">
+          <div className="flex flex-col gap-12 md:gap-16 md:pt-[0.6875rem]">
             {services.map((s) => (
               <ServiceGroup key={s.title} service={s} />
             ))}
           </div>
         </div>
-      </PageContainer>
+      </div>
     </section>
   );
 }

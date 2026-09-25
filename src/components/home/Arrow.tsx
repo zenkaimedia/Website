@@ -1,3 +1,5 @@
+import { DotChevron } from "./DotIcons";
+
 /* Dotted chevron arrows (white on transparent). Pass `invert` on light/white
    backgrounds so the white dots flip to black and stay visible. */
 export function Arrow({
@@ -9,18 +11,18 @@ export function Arrow({
   invert?: boolean;
   className?: string;
 }) {
-  const src =
-    dir === "down"
-      ? "/assets/general/down-arrow.png"
-      : "/assets/general/right-arrow.png";
-  const size = dir === "down" ? "h-2.5 w-auto" : "h-3 w-auto";
+  const flip = invert ? "[filter:invert(1)]" : "";
+  if (dir === "right") {
+    // Code-drawn dot chevron (same dot system as the mobile menu icons).
+    return <DotChevron className={`h-3 w-auto shrink-0 ${flip} ${className}`} />;
+  }
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={src}
+      src="/assets/general/down-arrow.png"
       alt=""
       aria-hidden="true"
-      className={`${size} shrink-0 object-contain ${invert ? "[filter:invert(1)]" : ""} ${className}`}
+      className={`h-2.5 w-auto shrink-0 object-contain ${flip} ${className}`}
     />
   );
 }

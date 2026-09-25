@@ -52,11 +52,13 @@ export default function FloatingCTA() {
       rel="noreferrer noopener"
       aria-hidden={!show}
       tabIndex={show ? 0 : -1}
-      className={`group fixed bottom-6 left-1/2 z-40 inline-flex -translate-x-1/2 items-center gap-3 rounded-xl bg-[#2a2a2a]/70 px-7 py-4 font-body text-[15px] font-medium text-white shadow-xl backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#2a2a2a]/85 ${show ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
+      // Hover (per reference): no colour change — the pill grows ~1.7% about
+      // its centre and the arrow slides ~6px right, fast ease-out both ways.
+      className={`group fixed bottom-6 left-1/2 z-40 inline-flex -translate-x-1/2 items-center gap-[1.55rem] rounded-[0.875rem] bg-[#2a2a2a]/70 px-[2.125rem] py-4 font-body text-[15px] font-medium text-white shadow-xl backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.017] ${show ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
         }`}
     >
       Start a project
-      <Arrow className="h-3 w-auto transition-transform duration-300 group-hover:translate-x-1" />
+      <Arrow className="h-[1.0625rem]! w-auto transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[0.375rem]" />
     </a>
   );
 }

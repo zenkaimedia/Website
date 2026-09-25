@@ -33,9 +33,11 @@ function ArrowUpRight() {
 
 export default function ServicesDirectory() {
   return (
-    <section className="bg-[#000000] pb-20 pt-6 md:pb-32 md:pt-20">
-      <PageContainer>
-        <div className="flex flex-col gap-14 md:gap-24">
+    // Mobile (reference, 412px): 14px caps group labels, 18/28px service
+    // links 8px apart starting 20px below, 64px between groups.
+    <section className="bg-[#000000] pb-20 pt-6 max-md:pb-[64px] max-md:pt-[20px] md:pb-32 md:pt-20">
+      <PageContainer className="max-md:px-[20px]!">
+        <div className="flex flex-col gap-14 max-md:gap-[64px] md:gap-24">
           {CATEGORIES.map((cat, i) => {
             const services = cat.titles
               .map((t) => SERVICES.find((s) => s.title === t))
@@ -45,10 +47,10 @@ export default function ServicesDirectory() {
             return (
               <div
                 key={cat.label}
-                className="grid gap-6 md:grid-cols-[15rem_1fr] md:gap-14"
+                className="grid gap-6 max-md:gap-[20px] md:grid-cols-[15rem_1fr] md:gap-14"
               >
                 <div className="flex flex-col">
-                  <p className="font-mono text-[clamp(0.85rem,3.8vw,1.15rem)] uppercase tracking-[0.15em] text-white md:text-[1.0625rem] md:tracking-[0.2em]">
+                  <p className="font-mono text-[clamp(0.85rem,3.8vw,1.15rem)] uppercase tracking-[0.15em] text-white max-md:font-body max-md:text-[14px] max-md:leading-[20px] max-md:tracking-normal md:text-[1.0625rem] md:tracking-[0.2em]">
                     {cat.label}
                   </p>
                   {/* Desktop: partner badge pinned bottom-left of the final row */}
@@ -63,12 +65,12 @@ export default function ServicesDirectory() {
                 </div>
 
                 {/* 3 columns so the widest category fills the row edge-to-edge */}
-                <div className="grid gap-x-8 gap-y-9 md:grid-cols-3 md:gap-x-12 md:gap-y-16">
+                <div className="grid gap-x-8 gap-y-9 max-md:gap-y-[8px] md:grid-cols-3 md:gap-x-12 md:gap-y-16">
                   {services.map((s) => (
                     <div key={s.title}>
                       <a
                         href="/services"
-                        className="group inline-flex items-center gap-2 font-body text-[clamp(1.15rem,5vw,1.45rem)] leading-tight text-white/40 transition-colors hover:text-white md:text-[1.5rem]"
+                        className="group inline-flex items-center gap-2 font-body text-[clamp(1.15rem,5vw,1.45rem)] leading-tight text-white/40 transition-colors hover:text-white max-md:text-[18px] max-md:leading-[28px] md:text-[1.5rem]"
                       >
                         {s.title}
                         <ArrowUpRight />

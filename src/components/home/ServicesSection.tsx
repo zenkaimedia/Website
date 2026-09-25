@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "motion/react";
-import { SERVICES, type Service } from "./services";
+import { SERVICES, DotServiceIcon, type Service } from "./services";
 import PageContainer from "./PageContainer";
 
 /* Staggered "down-to-up" reveal: cards start pushed down + faded, then rise
@@ -46,7 +46,7 @@ function ServiceCard({ service }: { service: Service }) {
   return (
     <motion.article
       variants={cardVariants}
-      className="group relative aspect-[3/4] w-[78%] shrink-0 snap-start overflow-hidden rounded-2xl bg-neutral-300 shadow-sm ring-1 ring-black/5 sm:w-[46%] md:w-auto"
+      className="group relative aspect-[3/4] w-[78%] shrink-0 snap-start overflow-hidden rounded-2xl bg-neutral-300 shadow-sm ring-1 ring-black/5 max-md:aspect-[320/432] max-md:w-[min(320px,78vw)] max-md:rounded-[8px] max-md:shadow-none max-md:ring-0 sm:w-[46%] md:w-auto"
     >
       {/* Background image — blurs and lifts on hover to make room for the menu. */}
       <img
@@ -60,18 +60,22 @@ function ServiceCard({ service }: { service: Service }) {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/45 to-transparent" />
 
       {/* Header: title above the service count, top-left (matches the reference) */}
-      <div className="absolute inset-x-0 top-0 flex flex-col gap-1 p-4 sm:p-5">
-        <h3 className="font-display text-[clamp(1.05rem,4.6vw,1.35rem)] font-semibold leading-tight text-white drop-shadow">
+      {/* Mobile (reference, 412px): 20px inset, 18px regular title, 14px
+          lowercase count 8px below at 70% white. */}
+      <div className="absolute inset-x-0 top-0 flex flex-col gap-1 p-4 max-md:gap-[8px] max-md:p-[20px] sm:p-5">
+        <h3 className="font-display text-[clamp(1.05rem,4.6vw,1.35rem)] font-semibold leading-tight text-white drop-shadow max-md:text-[18px] max-md:font-normal max-md:leading-[20px] max-md:tracking-normal">
           {service.title}
         </h3>
-        <span className="font-mono text-[clamp(0.65rem,2.9vw,0.75rem)] uppercase tracking-wide text-white/70">
+        <span className="font-mono text-[clamp(0.65rem,2.9vw,0.75rem)] uppercase tracking-wide text-white/70 max-md:font-body max-md:text-[14px] max-md:normal-case max-md:leading-[20px] max-md:tracking-normal">
           /{service.includes.length} services
         </span>
       </div>
 
-      {/* Resting corner glyph — fades out as the hover menu comes in. */}
-      <div className="absolute bottom-4 left-4 text-white/85 drop-shadow transition-opacity duration-300 group-hover:opacity-0 sm:bottom-5 sm:left-5">
-        <PixelIcon />
+      {/* Resting corner glyph — fades out as the hover menu comes in. Mobile:
+          the service's own 40px dot glyph, 20px in from the corner. */}
+      <div className="absolute bottom-4 left-4 text-white/85 drop-shadow transition-opacity duration-300 group-hover:opacity-0 max-md:bottom-[20px] max-md:left-[20px] max-md:text-white sm:bottom-5 sm:left-5">
+        <PixelIcon className="max-md:hidden" />
+        <DotServiceIcon name={service.icon} className="h-[40px] w-[40px] md:hidden" />
       </div>
 
       {/* Hover menu: the list of included services, rising in with a stagger,
@@ -103,10 +107,11 @@ export default function ServicesSection() {
   return (
     <section
       id="services"
-      className="scroll-mt-16 bg-[#ffffff] py-20 md:scroll-mt-20 md:py-28"
+      className="scroll-mt-16 bg-[#ffffff] py-20 max-md:pb-[46px] max-md:pt-[106px] md:scroll-mt-20 md:py-28"
     >
-      <PageContainer>
-        <p className="mb-8 font-mono text-[0.6875rem] uppercase tracking-[0.3em] text-black/45">
+      <PageContainer className="max-md:px-[20px]!">
+        {/* Mobile label per reference: 16px regular caps, grey, no tracking. */}
+        <p className="mb-8 font-mono text-[0.6875rem] uppercase tracking-[0.3em] text-black/45 max-md:mb-0 max-md:font-body max-md:text-[16px] max-md:leading-[16px] max-md:tracking-normal max-md:text-[#909090]">
           Our Services
         </p>
 
@@ -115,17 +120,18 @@ export default function ServicesSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.15 }}
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] md:grid md:grid-cols-4 md:gap-4 md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 max-md:-mx-[20px] max-md:gap-[12px] max-md:scroll-px-[20px] max-md:px-[20px] max-md:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] md:grid md:grid-cols-4 md:gap-4 md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden"
         >
           {SERVICES.map((service) => (
             <ServiceCard key={service.title} service={service} />
           ))}
         </motion.div>
 
-        <div className="mt-10 flex justify-start md:mt-12 md:justify-center">
+        <div className="mt-10 flex justify-start max-md:mt-[80px] md:mt-12 md:justify-center">
+          {/* Mobile: compact 48px black button, 14px regular, 8px radius. */}
           <a
             href="/services"
-            className="group inline-flex items-center justify-center rounded-xl bg-black px-8 py-4 font-body text-[17px] font-medium text-white shadow-lg transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03] hover:bg-black/85"
+            className="group inline-flex items-center justify-center rounded-xl bg-black px-8 py-4 font-body text-[17px] font-medium text-white shadow-lg transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03] hover:bg-black/85 max-md:h-[48px] max-md:rounded-[8px] max-md:px-[20px] max-md:py-0 max-md:text-[14px] max-md:font-normal max-md:shadow-none"
           >
             Explore All Services
           </a>

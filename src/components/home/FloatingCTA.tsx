@@ -54,11 +54,13 @@ export default function FloatingCTA() {
       tabIndex={show ? 0 : -1}
       // Hover (per reference): no colour change — the pill grows ~1.7% about
       // its centre and the arrow slides ~6px right, fast ease-out both ways.
-      className={`group fixed bottom-6 left-1/2 z-40 inline-flex -translate-x-1/2 items-center gap-[1.55rem] rounded-[0.875rem] bg-[#2a2a2a]/70 px-[2.125rem] py-4 font-body text-[15px] font-medium text-white shadow-xl backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.017] ${show ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
+      // Mobile (reference, 412px): 48px tall, 16px off the bottom, 8px radius,
+      // 20px padding, 16px regular text, #24242480 glass + blur, no shadow.
+      className={`group fixed bottom-6 left-1/2 z-40 inline-flex -translate-x-1/2 items-center gap-[1.55rem] rounded-[0.875rem] bg-[#2a2a2a]/70 px-[2.125rem] py-4 font-body text-[15px] font-medium text-white shadow-xl backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.017] max-md:bottom-[16px] max-md:h-[48px] max-md:gap-[16px] max-md:rounded-[8px] max-md:bg-[#24242480] max-md:px-[20px] max-md:py-0 max-md:text-[16px] max-md:font-normal max-md:shadow-none ${show ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
         }`}
     >
       Start a project
-      <Arrow className="h-[1.0625rem]! w-auto transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[0.375rem]" />
+      <Arrow className="h-[1.0625rem]! w-auto transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[0.375rem] max-md:h-[17px]!" />
     </a>
   );
 }

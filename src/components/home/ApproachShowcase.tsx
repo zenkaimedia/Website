@@ -73,15 +73,17 @@ function Heading({ dark }: { dark: boolean }) {
   }, [inView]);
 
   return (
-    <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
+    // Mobile (reference, 412px): 16px caps label, statement 20px below it at
+    // 36/40px regular.
+    <div className="grid gap-10 max-md:gap-[4px] md:grid-cols-[0.8fr_1.2fr]">
       <p
-        className={`pt-2 font-mono text-[0.8125rem] uppercase tracking-[0.3em] ${THEME_T} ${dark ? "text-white/45" : "text-black/45"}`}
+        className={`pt-2 font-mono text-[0.8125rem] uppercase tracking-[0.3em] max-md:pt-0 max-md:font-body max-md:text-[16px] max-md:leading-[16px] max-md:tracking-normal ${THEME_T} ${dark ? "text-white/45" : "text-black/45 max-md:text-[#909090]"}`}
       >
         Our Approach and Values
       </p>
       <h2
         ref={h2Ref}
-        className={`max-w-3xl font-display text-xl font-medium leading-[1.08] sm:text-2xl md:text-[2.75rem] lg:text-[2.875rem] ${THEME_T} ${dark ? "text-white" : "text-black"}`}
+        className={`max-w-3xl font-display text-xl font-medium leading-[1.08] max-md:text-[36px] max-md:font-normal max-md:leading-[40px] max-md:tracking-normal sm:text-2xl md:text-[2.75rem] lg:text-[2.875rem] ${THEME_T} ${dark ? "text-white" : "text-black"}`}
       >
         We combine creativity, strategic ideas and technology
         <span className={`${THEME_T} ${dark ? "text-white/35" : "text-black/35"}`}>
@@ -96,7 +98,9 @@ function Glyphs({ dark }: { dark: boolean }) {
   return (
     // Desktop row per the reference: 8×14px-grid icons whose centres sit 307px
     // apart (5.84vw icons + 10.16vw gaps), centred on the page and vertically.
-    <div className="mt-16 grid grid-cols-3 place-items-center gap-x-4 gap-y-12 md:mt-32 md:flex md:items-center md:justify-center md:gap-x-[10.16vw]">
+    // Mobile: 60px icons, 3 per row spread edge-to-edge 20px inside the text
+    // column (136px pitch at 412px), rows 40px apart, 101px under the statement.
+    <div className="mt-16 grid grid-cols-3 place-items-center gap-x-4 gap-y-12 max-md:mt-[101px] max-md:grid-cols-[repeat(3,60px)] max-md:justify-between max-md:gap-y-[40px] max-md:px-[20px] md:mt-32 md:flex md:items-center md:justify-center md:gap-x-[10.16vw]">
       {GLYPHS.map(({ name, rows, label }) => (
         <div key={name} className="group/icon relative flex flex-col items-center">
           {/* Value label — compact white pill 61px above the icon; fades and
@@ -106,7 +110,7 @@ function Glyphs({ dark }: { dark: boolean }) {
           </span>
           <DotGlyph
             rows={rows}
-            className={`h-auto w-8 sm:w-12 md:w-[5.84vw] ${THEME_T} ${dark ? "text-white/30" : "text-[#d1d1d1]"}`}
+            className={`h-auto w-8 max-md:w-[60px] sm:w-12 md:w-[5.84vw] ${THEME_T} ${dark ? "text-white/30" : "text-[#d1d1d1]"}`}
           />
         </div>
       ))}
@@ -167,7 +171,7 @@ export default function ApproachShowcase() {
          Rendered LIGHT; on mobile the surrounding MobileFlip shell inverts the
          whole region to flip it dark — in perfect sync with every other section,
          since one shell filter drives the entire transition. */}
-      <PageContainer className="pt-2 pb-20 md:pt-4 md:pb-28 lg:pt-8 lg:pb-32">
+      <PageContainer className="pt-2 pb-20 max-md:px-[20px]! max-md:pt-0 md:pt-4 md:pb-28 lg:pt-8 lg:pb-32">
         <Heading dark={false} />
         <Glyphs dark={false} />
       </PageContainer>

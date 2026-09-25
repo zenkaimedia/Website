@@ -63,10 +63,10 @@ function WorkCard({ work }: { work: Work }) {
       variants={cardVariants}
       onMouseEnter={handleEnter}
       onMouseMove={handleMove}
-      className="group relative grid rounded-[1.75rem] bg-white/[0.02] p-3 ring-1 ring-white/[0.08] transition-colors hover:ring-white/15 md:grid-cols-[0.82fr_1fr] md:grid-rows-1 md:gap-6 md:p-4 md:min-h-[31.25rem] 2xl:aspect-[2693/957] 2xl:min-h-0"
+      className="group relative grid rounded-[1.75rem] bg-white/[0.02] p-3 ring-1 ring-white/[0.08] transition-colors hover:ring-white/15 max-md:rounded-[8px] max-md:bg-white/[0.04] max-md:p-[12px] max-md:ring-0 md:grid-cols-[0.82fr_1fr] md:grid-rows-1 md:gap-6 md:p-4 md:min-h-[31.25rem] 2xl:aspect-[2693/957] 2xl:min-h-0"
     >
       {/* Image — inset with rounded corners */}
-      <div className="relative min-h-[18.75rem] overflow-hidden rounded-[1.25rem] md:min-h-0">
+      <div className="relative min-h-[18.75rem] overflow-hidden rounded-[1.25rem] max-md:aspect-[4/3] max-md:min-h-0 max-md:rounded-[6px] md:min-h-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={work.image}
@@ -77,8 +77,8 @@ function WorkCard({ work }: { work: Work }) {
       </div>
 
       {/* Content */}
-      <div className="flex flex-col px-2 py-8 md:py-12 md:pl-8 md:pr-12">
-        <h3 className="font-display text-3xl font-bold leading-[1.05] text-white sm:text-4xl md:text-5xl">
+      <div className="flex flex-col px-2 py-8 max-md:px-0 max-md:pb-0 max-md:pt-[20px] md:py-12 md:pl-8 md:pr-12">
+        <h3 className="font-display text-3xl font-bold leading-[1.05] text-white max-md:text-[24px] max-md:font-normal max-md:leading-[32px] max-md:tracking-normal sm:text-4xl md:text-5xl">
           {work.title}
         </h3>
         <p className="mt-6 hidden max-w-xl font-body text-[0.9375rem] leading-relaxed text-white/45 md:mt-7 md:block md:text-base">
@@ -96,23 +96,27 @@ function WorkCard({ work }: { work: Work }) {
         </div>
 
         {/* Mobile: service tags + arrow */}
-        <div className="mt-5 flex items-end justify-between gap-4 md:hidden">
+        {/* Mobile (reference, 412px): 14px "Services" label, 32px pills with
+            12px text, dot chevron in a 40px box bottom-right. */}
+        <div className="mt-[4px] flex items-end justify-between gap-4 md:hidden">
           <div>
-            <p className="font-mono text-[0.6875rem] uppercase tracking-[0.15em] text-white/40">
+            <p className="font-body text-[14px] leading-[20px] text-[#909090]">
               Services
             </p>
-            <div className="mt-2.5 flex flex-wrap gap-2">
+            <div className="mt-[4px] flex flex-wrap gap-[8px]">
               {work.services.map((s) => (
                 <span
                   key={s}
-                  className="rounded-lg border border-white/15 bg-white/[0.06] px-2.5 py-1.5 font-body text-[0.75rem] text-white/85"
+                  className="flex h-[32px] items-center rounded-[8px] bg-white/[0.08] px-[16px] font-body text-[12px] leading-[16px] text-white/85"
                 >
                   {s}
                 </span>
               ))}
             </div>
           </div>
-          <DotChevron className="mb-1 h-4 w-auto shrink-0" />
+          <span className="grid h-[40px] w-[40px] shrink-0 place-items-center">
+            <DotChevron className="h-[16px] w-auto" />
+          </span>
         </div>
       </div>
 
@@ -140,10 +144,10 @@ export default function LatestWork() {
   return (
     <section
       id="portfolio"
-      className="scroll-mt-16 bg-[#000000] py-20 md:scroll-mt-20 md:py-28"
+      className="scroll-mt-16 bg-[#000000] py-20 max-md:pb-[80px] max-md:pt-[26px] md:scroll-mt-20 md:py-28"
     >
-      <PageContainer>
-        <p className="mb-10 font-mono text-[0.6875rem] uppercase tracking-[0.3em] text-white/45">
+      <PageContainer className="max-md:px-[20px]!">
+        <p className="mb-10 font-mono text-[0.6875rem] uppercase tracking-[0.3em] text-white/45 max-md:mb-[20px] max-md:font-body max-md:text-[16px] max-md:leading-[24px] max-md:tracking-normal max-md:text-[#909090]">
           Latest Work
         </p>
 
@@ -152,15 +156,19 @@ export default function LatestWork() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.12 }}
-          className="flex flex-col gap-5 sm:gap-6"
+          className="flex flex-col gap-5 max-md:gap-[12px] sm:gap-6"
         >
           {HOME_WORK.map((work) => (
             <WorkCard key={work.title} work={work} />
           ))}
         </motion.div>
 
-        <div className="mt-12 flex justify-center">
-          <a href="/portfolio" className={`inline-flex ${CTA_SIMPLE}`}>
+        {/* Mobile: compact 48px left-aligned button, 16px regular, 8px radius. */}
+        <div className="mt-12 flex justify-center max-md:mt-[40px] max-md:justify-start">
+          <a
+            href="/portfolio"
+            className={`inline-flex ${CTA_SIMPLE} max-md:h-[48px] max-md:items-center max-md:rounded-[8px] max-md:px-[20px] max-md:py-0 max-md:text-[16px] max-md:font-normal max-md:shadow-none`}
+          >
             View full portfolio
           </a>
         </div>

@@ -44,7 +44,7 @@ const NEWS: Post[] = [
 function ChevronCircle({ className = "" }: { className?: string }) {
   return (
     <span
-      className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/25 text-white/75 md:h-14 md:w-14 ${className}`}
+      className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/25 text-white/75 max-md:h-[40px] max-md:w-[40px] md:h-14 md:w-14 ${className}`}
     >
       <svg
         viewBox="0 0 24 24"
@@ -68,15 +68,16 @@ function NewsCard({ post, className = "" }: { post: Post; className?: string }) 
     <motion.a
       variants={cardVariants}
       href={post.href}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl bg-[#141414]/80 p-5 shadow-2xl ring-1 ring-white/10 backdrop-blur-2xl transition-transform duration-500 ease-out hover:-translate-y-2.5 md:h-[36rem] md:flex-row md:p-0 ${className}`}
+      className={`group relative flex flex-col overflow-hidden rounded-2xl bg-[#141414]/80 p-5 shadow-2xl ring-1 ring-white/10 backdrop-blur-2xl transition-transform duration-500 ease-out hover:-translate-y-2.5 max-md:rounded-[8px] max-md:p-[12px] max-md:shadow-none max-md:ring-0 md:h-[36rem] md:flex-row md:p-0 ${className}`}
     >
-      {/* Text — above the image on mobile, left column on desktop */}
-      <div className="flex w-full shrink-0 flex-col md:w-2/5 md:justify-between md:p-10">
+      {/* Text — above the image on mobile, left column on desktop. Mobile
+          (reference, 412px): 24px regular title, 14px grey date. */}
+      <div className="flex w-full shrink-0 flex-col max-md:px-[4px] max-md:pt-[4px] md:w-2/5 md:justify-between md:p-10">
         <div>
-          <h3 className="font-display text-[clamp(1.3rem,5.6vw,1.6rem)] font-bold leading-snug text-white md:text-[2.25rem] md:leading-[1.15]">
+          <h3 className="font-display text-[clamp(1.3rem,5.6vw,1.6rem)] font-bold leading-snug text-white max-md:text-[24px] max-md:font-normal max-md:leading-[24px] max-md:tracking-normal md:text-[2.25rem] md:leading-[1.15]">
             {post.title}
           </h3>
-          <p className="mt-2 font-body text-[clamp(0.9rem,4vw,1.25rem)] text-white/40 md:mt-6 md:text-[1.0625rem]">
+          <p className="mt-2 font-body text-[clamp(0.9rem,4vw,1.25rem)] text-white/40 max-md:mt-[8px] max-md:text-[14px] max-md:leading-[20px] max-md:text-[#909090] md:mt-6 md:text-[1.0625rem]">
             {post.date}
           </p>
         </div>
@@ -85,8 +86,8 @@ function NewsCard({ post, className = "" }: { post: Post; className?: string }) 
       </div>
 
       {/* Mobile — portrait image with the chevron beside its bottom-right */}
-      <div className="mt-4 flex items-end gap-3 md:hidden">
-        <div className="aspect-[5/7] flex-1 overflow-hidden rounded-xl">
+      <div className="mt-[24px] flex items-end gap-3 md:hidden">
+        <div className="aspect-[300/367] flex-1 overflow-hidden rounded-[6px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={post.image}
@@ -119,8 +120,8 @@ export default function LatestNews() {
       id="insights"
       className="scroll-mt-16 bg-[#000000] pb-20 md:scroll-mt-20 md:pb-28"
     >
-      <PageContainer>
-        <p className="mb-6 font-mono text-[clamp(0.85rem,4vw,1.25rem)] uppercase tracking-[0.25em] text-white/45 md:mb-10 md:text-[0.9375rem] md:tracking-[0.3em]">
+      <PageContainer className="max-md:px-[20px]!">
+        <p className="mb-6 font-mono text-[clamp(0.85rem,4vw,1.25rem)] uppercase tracking-[0.25em] text-white/45 max-md:mb-[20px] max-md:font-body max-md:text-[16px] max-md:leading-[24px] max-md:tracking-normal max-md:text-[#909090] md:mb-10 md:text-[0.9375rem] md:tracking-[0.3em]">
           Latest News
         </p>
 
@@ -130,14 +131,18 @@ export default function LatestNews() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.15 }}
-          className="relative flex flex-col gap-6 md:flex-row md:items-start md:gap-0"
+          className="relative flex flex-col gap-6 max-md:gap-[16px] md:flex-row md:items-start md:gap-0"
         >
           <NewsCard post={NEWS[0]} className="z-0 md:w-[58%]" />
           <NewsCard post={NEWS[1]} className="z-10 md:-ml-[16%] md:mt-14 md:w-[58%]" />
         </motion.div>
 
-        <div className="mt-12 flex justify-center">
-          <a href="#contact" className={`inline-flex ${CTA_SIMPLE}`}>
+        {/* Mobile: compact 48px left-aligned button, 16px regular. */}
+        <div className="mt-12 flex justify-center max-md:mt-[40px] max-md:justify-start">
+          <a
+            href="#contact"
+            className={`inline-flex ${CTA_SIMPLE} max-md:h-[48px] max-md:items-center max-md:rounded-[8px] max-md:px-[20px] max-md:py-0 max-md:text-[16px] max-md:font-normal max-md:shadow-none`}
+          >
             View all news
           </a>
         </div>

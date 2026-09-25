@@ -55,25 +55,40 @@ export function DotArrowDownRight({ className = "" }: IconProps) {
   return <Dots viewBox="830.3 797.1 2197.5 2320.8" r={186.9} points={CORNER} className={className} />;
 }
 
-/* Phone handset — 9×9 dot matrix on the same grid as the service glyphs
-   (DotServiceIcon: 4-unit step, 1.4 radius), for the desktop "book a call"
-   tile. "1" = dot. */
+/* Telephone handset — 64 dots on a 13×13 grid, read dot-for-dot off the
+   reference (receiver runs from the upper-left earpiece down to the lower-right
+   mouthpiece). Reference dots are 9px on an 11.4px pitch → radius 0.394 of the
+   step. Drawn in currentColor so it follows its container (white/black).
+   "1" = dot. */
 const PHONE_ROWS = [
-  "110000000",
-  "111000000",
-  "111000000",
-  "011000000",
-  "001100000",
-  "000110011",
-  "000011111",
-  "000001111",
-  "000000011",
+  "0110000000000",
+  "1111000000000",
+  "1111100000000",
+  "1111100000000",
+  "1111000000000",
+  "0111000000000",
+  "0111100000000",
+  "0011110000000",
+  "0001111001100",
+  "0000111111110",
+  "0000011111111",
+  "0000001111111",
+  "0000000011110",
 ];
+const PHONE_STEP = 10;
 const PHONE: [number, number][] = PHONE_ROWS.flatMap((row, y) =>
-  [...row].flatMap((cell, x) => (cell === "1" ? [[x * 4 + 2, y * 4 + 2] as [number, number]] : []))
+  [...row].flatMap((cell, x) =>
+    cell === "1" ? [[x * PHONE_STEP + PHONE_STEP / 2, y * PHONE_STEP + PHONE_STEP / 2] as [number, number]] : []
+  )
 );
 export function DotPhone({ className = "" }: IconProps) {
-  return <Dots viewBox="0 0 36 36" r={1.4} points={PHONE} className={className} />;
+  return (
+    <svg viewBox="0 0 130 130" aria-hidden="true" fill="currentColor" className={className}>
+      {PHONE.map(([cx, cy]) => (
+        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={3.94} />
+      ))}
+    </svg>
+  );
 }
 
 /* › — 5-dot chevron, rebuilt on an exact grid from the reference button:

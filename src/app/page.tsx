@@ -166,7 +166,8 @@ export default function Home() {
         </PageContainer>
 
         {/* Socials — spread across */}
-        <PageContainer className="flex items-center justify-between pb-8 pt-6 font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-white/55">
+        <PageContainer className="flex items-center justify-between pb-8 pt-6 font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-white/55 max-md:px-[20px]! max-md:font-body max-md:text-[12px] max-md:tracking-normal">
+
           {SOCIALS.map((s) => (
             <a
               key={s.label}

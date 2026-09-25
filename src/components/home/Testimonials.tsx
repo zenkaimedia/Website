@@ -44,8 +44,8 @@ const TESTIMONIALS: Testimonial[] = [
    tallest, with the quote centred and the caption pinned to the bottom. */
 function Card({ t }: { t: Testimonial }) {
   return (
-    <figure className="flex h-full flex-col rounded-2xl bg-white/[0.03] p-7 text-center ring-1 ring-white/10 md:mb-5 md:p-12">
-      <blockquote className="flex flex-1 items-center justify-center font-body text-sm leading-relaxed text-white/70 md:text-[1.1875rem] md:leading-[1.75]">
+    <figure className="flex h-full flex-col rounded-2xl bg-white/[0.03] p-7 text-center ring-1 ring-white/10 max-md:rounded-[8px] max-md:p-[16px] md:mb-5 md:p-12">
+      <blockquote className="flex flex-1 items-center justify-center font-body text-sm leading-relaxed text-white/70 max-md:text-[14px] max-md:leading-[20px] md:text-[1.1875rem] md:leading-[1.75]">
         <span>&ldquo;{t.quote}&rdquo;</span>
       </blockquote>
       <figcaption className="mt-6 flex items-center justify-center gap-3 md:mt-10 md:gap-5">
@@ -71,15 +71,17 @@ export default function Testimonials() {
 
   return (
     <section className="bg-[#000000] pb-20 md:pb-28">
-      <PageContainer>
-      <div className="overflow-hidden rounded-3xl bg-white/[0.02] ring-1 ring-white/10">
-        <div className="grid gap-10 p-8 md:grid-cols-2 md:gap-16 md:p-12 lg:p-16">
+      <PageContainer className="max-md:px-[20px]!">
+      {/* Mobile (reference, 412px): 12px panel padding, 8px radius; 32px label
+          pill; 36/40px regular heading 20px below it. */}
+      <div className="overflow-hidden rounded-3xl bg-white/[0.02] ring-1 ring-white/10 max-md:rounded-[8px]">
+        <div className="grid gap-10 p-8 max-md:gap-[28px] max-md:p-[12px] md:grid-cols-2 md:gap-16 md:p-12 lg:p-16">
           {/* Left — heading + CTA */}
           <div className="flex flex-col">
-            <span className="w-fit rounded-xl bg-white/10 px-3 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-white/70 md:px-5 md:py-2.5 md:text-[0.8125rem]">
+            <span className="w-fit rounded-xl bg-white/10 px-3 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-white/70 max-md:flex max-md:h-[32px] max-md:items-center max-md:rounded-[6px] max-md:px-[16px] max-md:py-0 max-md:font-body max-md:text-[14px] max-md:tracking-normal md:px-5 md:py-2.5 md:text-[0.8125rem]">
               Testimonials
             </span>
-            <h2 className="mt-6 max-w-md font-display text-3xl font-bold leading-[1.1] text-white sm:text-4xl md:mt-8 md:max-w-[35rem] md:text-[3.5rem]">
+            <h2 className="mt-6 max-w-md font-display text-3xl font-bold leading-[1.1] text-white max-md:mt-[20px] max-md:text-[36px] max-md:font-normal max-md:leading-[40px] max-md:tracking-normal sm:text-4xl md:mt-8 md:max-w-[35rem] md:text-[3.5rem]">
               What our clients say
               <span className="text-white/35"> about working with us.</span>
             </h2>
@@ -113,7 +115,10 @@ export default function Testimonials() {
           </div>
 
           {/* Mobile CTA — the only one on mobile, sitting below the cards */}
-          <a href="#contact" className={`w-full md:hidden ${CTA_SIMPLE}`}>
+          <a
+            href="#contact"
+            className={`w-full md:hidden ${CTA_SIMPLE} max-md:h-[48px] max-md:rounded-[8px] max-md:py-0 max-md:text-[16px] max-md:font-normal max-md:shadow-none`}
+          >
             Let&apos;s work together
             <Arrow invert className={CTA_ARROW} />
           </a>

@@ -46,7 +46,7 @@ export default function MobileHero({ className = "" }: { className?: string }) {
 
   return (
     <section
-      className={`relative h-[90dvh] min-h-[34rem] overflow-hidden bg-black ${className}`}
+      className={`relative h-[80svh] min-h-[480px] overflow-hidden bg-black ${className}`}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
@@ -73,23 +73,25 @@ export default function MobileHero({ className = "" }: { className?: string }) {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
       {/* Caption + progress */}
-      <div className="absolute inset-x-0 bottom-0 z-10 px-6 pb-8">
-        <p className="font-mono text-[0.6875rem] tracking-[0.25em] text-white/70">
+      {/* Reference (412px phone): 16px inset, 12px counter, 24px regular title,
+          4px bars 8px apart sitting 16px off the bottom edge. */}
+      <div className="absolute inset-x-0 bottom-0 z-10 px-[16px] pb-[16px]">
+        <p className="font-body text-[12px] leading-[16px] tracking-[0.1em] text-white/60">
           0{active + 1} / 0{SLIDES.length}
         </p>
-        <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-white">
+        <h2 className="mt-[4px] font-display text-[24px] font-normal leading-[32px] tracking-normal text-white">
           {SLIDES[active].title}
         </h2>
 
         {/* Segmented progress bar */}
-        <div className="mt-5 flex gap-2">
+        <div className="mt-[20px] flex gap-[8px]">
           {SLIDES.map((_, i) => (
             <button
               key={i}
               type="button"
               aria-label={`Go to slide ${i + 1}`}
               onClick={() => go(i)}
-              className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/25"
+              className="h-[4px] flex-1 overflow-hidden rounded-full bg-white/25"
             >
               <span
                 key={active} // remount so the fill animation restarts each slide

@@ -285,7 +285,7 @@ export default function HomeNav() {
           style={{ height: LOGO_SIZE, width: LOGO_SIZE }}
           className={`hidden shrink-0 place-items-center rounded-2xl ${GLASS} transition-colors hover:bg-[#2a2a2a80] md:grid`}
         >
-          <DotPhone className="h-[2.25rem] w-[2.25rem]" />
+          <DotPhone className="h-[2.25rem] w-[2.25rem] text-white" />
         </a>
 
         {/* Right: hamburger (mobile) — opens the full-screen menu */}

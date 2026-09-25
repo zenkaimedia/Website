@@ -3,6 +3,7 @@ import HomeNav from "@/components/home/HomeNav";
 import MobileFlipProvider from "@/components/home/MobileFlip";
 import AboutShowcase from "@/components/home/AboutShowcase";
 import AboutStats from "@/components/home/AboutStats";
+import BrandsMarquee from "@/components/home/BrandsMarquee";
 import ContactForm from "@/components/home/ContactForm";
 import ServicesDirectory from "@/components/home/ServicesDirectory";
 import FooterWordmark from "@/components/home/FooterWordmark";
@@ -120,6 +121,9 @@ export default function AboutPage() {
             </div>
           </div>
         </PageContainer>
+
+        {/* ------------------------------------------------------------- BRANDS */}
+        <BrandsMarquee />
 
         {/* ------------------------------------------------------------ CONTACT */}
         <section id="contact" className="scroll-mt-16 bg-[#000000] pb-16 pt-4 md:scroll-mt-20 md:py-28">

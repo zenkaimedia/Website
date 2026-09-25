@@ -6,6 +6,7 @@ import ServicesSection from "@/components/home/ServicesSection";
 import ApproachShowcase from "@/components/home/ApproachShowcase";
 import MobileFlipProvider from "@/components/home/MobileFlip";
 import LatestWork from "@/components/home/LatestWork";
+import BrandsMarquee from "@/components/home/BrandsMarquee";
 import Testimonials from "@/components/home/Testimonials";
 import LatestNews from "@/components/home/LatestNews";
 import ServicesDirectory from "@/components/home/ServicesDirectory";
@@ -127,6 +128,9 @@ export default function Home() {
         <div className="mflip-counter [filter:invert(1)_hue-rotate(180deg)] md:![filter:none]">
           {/* ---------------------------------------------------------- PORTFOLIO */}
           <LatestWork />
+
+          {/* ------------------------------------------------------- BRANDS */}
+          <BrandsMarquee />
 
       {/* ------------------------------------------------------------ TESTIMONIALS */}
       <Testimonials />

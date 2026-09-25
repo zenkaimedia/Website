@@ -54,7 +54,7 @@ function ServiceCard({ service }: { service: Service }) {
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
       style={{ rotateX, rotateY, transformPerspective: 1000 }}
-      className="group relative aspect-[3/4] w-[78%] shrink-0 snap-start overflow-hidden rounded-2xl bg-neutral-300 shadow-sm ring-1 ring-black/5 max-md:aspect-[320/432] max-md:w-[min(320px,78vw)] max-md:rounded-[8px] max-md:shadow-none max-md:ring-0 sm:w-[46%] md:aspect-[417/575] md:w-auto md:rounded-[1.2rem] md:shadow-none md:ring-0"
+      className="group relative aspect-[3/4] w-[78%] shrink-0 snap-start overflow-hidden rounded-2xl bg-neutral-300 shadow-sm ring-1 ring-black/5 max-md:aspect-[320/432] max-md:w-[min(320px,calc(100vw-33px))] max-md:rounded-[8px] max-md:shadow-none max-md:ring-0 sm:w-[46%] md:aspect-[417/575] md:w-auto md:rounded-[1.2rem] md:shadow-none md:ring-0"
     >
       {/* Background image — per the reference recording it defocuses heavily
           (~16px blur, no darkening) over ~250ms on enter and refocuses on exit.
@@ -92,6 +92,14 @@ function ServiceCard({ service }: { service: Service }) {
         <DotServiceIcon name={service.icon} className="h-[40px] w-[40px] md:h-[2.5rem] md:w-[2.5rem]" />
       </div>
 
+      {/* Mobile: the whole card opens the service page (reference: tap →
+          page transition). Desktop keeps the hover menu's "See More". */}
+      <a
+        href={serviceHref(service.title)}
+        aria-label={service.title}
+        className="absolute inset-0 z-10 md:hidden"
+      />
+
       {/* Hover menu: the list of included services plus a "See More" link.
           Reference: the whole menu fades in place (no slide, no stagger) while
           coming into focus from a soft blur, just behind the image blur;
@@ -125,12 +133,12 @@ export default function ServicesSection() {
   return (
     <section
       id="services"
-      className="scroll-mt-16 bg-[#ffffff] py-20 max-md:pb-[46px] max-md:pt-[106px] md:scroll-mt-20 md:py-28"
+      className="scroll-mt-16 bg-[#ffffff] py-20 max-md:pb-[46px] max-md:pt-[84px] md:scroll-mt-20 md:py-28"
     >
       <PageContainer className="max-md:px-[20px]! md:max-w-none! md:px-[6rem]!">
         {/* Label per reference: 16px regular grey caps on mobile, 19px on
             desktop, no tracking. */}
-        <p className="mb-8 font-mono text-[0.6875rem] uppercase tracking-[0.3em] text-black/45 max-md:mb-0 max-md:font-body max-md:text-[16px] max-md:leading-[16px] max-md:tracking-normal max-md:text-[#909090] md:mb-[0.375rem] md:font-body md:text-[1.2rem] md:leading-[1.8rem] md:tracking-normal md:text-[#909090]">
+        <p className="mb-8 font-mono text-[0.6875rem] uppercase tracking-[0.3em] text-black/45 max-md:mb-[22px] max-md:font-body max-md:text-[16px] max-md:leading-[16px] max-md:tracking-normal max-md:text-[#909090] md:mb-[0.375rem] md:font-body md:text-[1.2rem] md:leading-[1.8rem] md:tracking-normal md:text-[#909090]">
           Our Services
         </p>
 
@@ -139,14 +147,14 @@ export default function ServicesSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.15 }}
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 max-md:-mx-[20px] max-md:gap-[12px] max-md:scroll-px-[20px] max-md:px-[20px] max-md:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] md:grid md:grid-cols-4 md:gap-[1.2rem] md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden pb-4 max-md:-mx-[20px] max-md:gap-[12px] max-md:scroll-px-[20px] max-md:px-[20px] max-md:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] md:grid md:grid-cols-4 md:gap-[1.2rem] md:overflow-visible md:pb-0 md:overflow-y-visible [&::-webkit-scrollbar]:hidden"
         >
           {SERVICES.map((service) => (
             <ServiceCard key={service.title} service={service} />
           ))}
         </motion.div>
 
-        <div className="mt-10 flex justify-start max-md:mt-[80px] md:mt-12 md:justify-center">
+        <div className="mt-10 flex justify-start max-md:mt-[20px] md:mt-12 md:justify-center">
           {/* Mobile: compact 48px black button, 14px regular, 8px radius. */}
           <a
             href="/services"

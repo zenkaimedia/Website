@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import HomeNav from "@/components/home/HomeNav";
 import InvertShell from "@/components/home/InvertShell";
 import ServicesOutro from "@/components/home/ServicesOutro";
@@ -10,11 +11,12 @@ import { Arrow } from "@/components/home/Arrow";
 import { CTA_ARROW } from "@/components/home/cta";
 import PortfolioGrid from "@/components/home/PortfolioGrid";
 
-export const metadata: Metadata = {
-  title: "Portfolio — Zenkai Media",
+export const metadata: Metadata = pageMetadata({
+  title: "Portfolio — Selected Work",
   description:
-    "A selection of Zenkai Media's work across branding, creative production, AI content, performance marketing, and web development.",
-};
+    "Selected work from Zenkai Media across creative production, AI creative, branding, performance marketing and web development.",
+  path: "/portfolio",
+});
 
 const SOCIALS = [
   { label: "Instagram", href: "https://www.instagram.com/zenkaimedia.in" },

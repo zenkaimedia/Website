@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useMotionTemplate } from "motion/react
 import { useSetMobileDark } from "./MobileFlip";
 import PageContainer from "./PageContainer";
 
-const GIF_URL = "/assets/portfolio/showcasegif.gif";
+const GIF_URL = "/assets/portfolio/showcase.webp"; // animated WebP (was a 1.5 MB GIF)
 const MOBILE_SHOWCASE = "/assets/portfolio/mobileshowcaseimg.webp";
 
 /* About-page centrepiece — the same scroll-linked gif treatment as the home

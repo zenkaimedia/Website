@@ -5,6 +5,9 @@ import InvertShell from "@/components/home/InvertShell";
 import ServicePageEnd from "@/components/home/ServicePageEnd";
 import { DotChevron, DotProcessIcon } from "@/components/home/DotIcons";
 import { SUB_SERVICE_PAGES, getSubServicePage, subServiceHref } from "@/components/home/subServiceDetails";
+import JsonLd from "@/components/seo/JsonLd";
+import { ogImage, pageMetadata } from "@/lib/seo";
+import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
 type Params = { params: Promise<{ slug: string; sub: string }> };
 
@@ -19,11 +22,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug, sub } = await params;
   const p = getSubServicePage(slug, sub);
   if (!p) return {};
-  return {
-    title: `${p.title} — ${p.parent.title} — Zenkai Media`,
-    description: p.body,
-    openGraph: { images: [p.parent.hero] },
-  };
+  return pageMetadata({
+    title: p.seoTitle,
+    description: p.seoDescription,
+    path: p.href,
+    image: ogImage(`service-${p.parent.slug}`),
+  });
 }
 
 /* Layout measured off the reference sub-service page — desktop at 1920
@@ -44,6 +48,24 @@ export default async function SubServicePage({ params }: Params) {
 
   return (
     <main className="bg-[#ffffff] font-body">
+      <JsonLd
+        data={[
+          serviceSchema({
+            name: p.title,
+            serviceType: p.title,
+            description: p.seoDescription,
+            path: p.href,
+            image: parent.hero,
+            offers: p.included.map((i) => i.title),
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: parent.title, path: parent.href },
+            { name: p.title, path: p.href },
+          ]),
+        ]}
+      />
       <HomeNav />
 
       <InvertShell>

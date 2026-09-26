@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useMotionValue, useSpring, type Variants } from "motion/react";
-import { CTA_BASE, CTA_SIMPLE } from "./cta";
+import { CTA_SIMPLE } from "./cta";
 import PageContainer from "./PageContainer";
 import { HOME_WORK, type Work } from "./portfolio";
 import { DotChevron } from "./DotIcons";

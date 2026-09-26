@@ -19,7 +19,7 @@ export function Arrow({
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src="/assets/general/down-arrow.png"
+      src="/assets/general/down-arrow.webp"
       alt=""
       aria-hidden="true"
       className={`h-2.5 w-auto shrink-0 object-contain ${flip} ${className}`}

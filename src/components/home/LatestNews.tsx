@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "motion/react";
-import { CTA_BASE, CTA_SIMPLE } from "./cta";
+import { CTA_SIMPLE } from "./cta";
 import PageContainer from "./PageContainer";
 
 /* Cards rise into view, staggered — same motion language as Latest Work. */

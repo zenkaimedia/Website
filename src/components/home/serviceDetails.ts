@@ -16,6 +16,10 @@ export function serviceSlug(title: string): string {
 export type ProcessStep = { title: string; text: string };
 
 type Detail = {
+  /** Search title (the layout adds " | Zenkai Media"). */
+  seoTitle: string;
+  /** Meta description, ~150–160 characters. */
+  seoDescription: string;
   /** Dark part of the intro statement … */
   lead: string;
   /** … and its grey continuation. */
@@ -30,95 +34,116 @@ type Detail = {
 
 const DETAILS: Record<string, Detail> = {
   "Creative Production": {
-    lead: "We turn ideas into visuals",
-    tail: "that stop the scroll and tell your story.",
+    seoTitle: "Creative & Video Production Agency",
+    seoDescription:
+      "Video production, photography and post-production for brands that need to look as good as they are. Concept to final cut, produced in-house by Zenkai Media.",
+    lead: "Ideas, filmed and framed",
+    tail: "with the care your brand deserves.",
     body:
-      "Creative production is where a brand becomes visible. From studio product shoots to on-location videography and post-production, we plan, shoot and finish every asset in-house — so the look, the pacing and the quality stay consistent on every platform your audience sees you on.",
+      "Creative production is where strategy becomes something people can see. We concept, shoot and finish brand films, campaign video and photography in-house — from studio product work to on-location shoots — with our production team based in Ahmedabad and working with brands worldwide. One team, one standard, from the first frame to the final export.",
     process: [
-      { title: "Brief & Concept", text: "We start with your goals, audience and channels, then shape a creative concept and shot list that everything else is built around." },
-      { title: "Pre-Production", text: "Locations, talent, props, lighting and schedules are planned in detail so shoot days run smoothly and nothing is left to chance." },
-      { title: "Production", text: "Our crew captures photo and video on set or on location, directing every frame against the agreed concept." },
-      { title: "Post & Delivery", text: "Editing, colour, sound and retouching — then exports sized and formatted for every platform, ready to publish." },
+      { title: "Brief & Concept", text: "Goals, audience and channels first — then a concept, script and shot list that everything else is built around." },
+      { title: "Pre-Production", text: "Locations, talent, styling, lighting and schedules planned in detail, so shoot days run to plan." },
+      { title: "Production", text: "Our crew captures photo and video on set or on location, directing every frame against the concept." },
+      { title: "Post & Delivery", text: "Edit, colour, sound and retouching — exported and sized for every platform you publish on." },
     ],
     work: ["airblack", "ponds"],
   },
   "AI Creative Studio": {
-    lead: "We use AI to produce premium creative",
-    tail: "at the speed modern marketing demands.",
+    seoTitle: "AI Creative Studio — AI Video & Ad Production",
+    seoDescription:
+      "AI commercials, brand films, UGC and product ads — generative production guided by real creative direction. Premium AI video production by Zenkai Media.",
+    lead: "AI-assisted production,",
+    tail: "directed like a real shoot.",
     body:
-      "Our AI Creative Studio combines generative tools with real creative direction. We produce commercials, brand films, UGC-style content and product ads that look crafted, not generated — giving you more variations, faster turnaround and the freedom to test ideas that would be too costly to shoot.",
+      "Our AI Creative Studio pairs generative tools with the judgement of a production team. We create commercials, brand films, UGC-style content and product ads that feel crafted, not generated — with faster turnaround, more variations to test, and ideas that would be impractical or too costly to film. Every output is scripted, directed, edited and finished by people.",
     process: [
-      { title: "Creative Direction", text: "We define the story, look and message first, so every AI output serves a clear idea rather than a random prompt." },
-      { title: "Generation", text: "Scenes, characters and product shots are generated and iterated, guided by references and your brand guidelines." },
-      { title: "Refinement", text: "Our editors compose, grade, sound-design and polish every frame until it meets broadcast-ready standards." },
-      { title: "Variations & Testing", text: "We deliver multiple versions and formats so you can test hooks, angles and audiences across channels." },
+      { title: "Creative Direction", text: "Story, look and message are defined first, so every output serves an idea — not a prompt." },
+      { title: "Generation", text: "Scenes, characters and product shots are generated and iterated against references and your brand guidelines." },
+      { title: "Refinement", text: "Editors compose, grade, sound-design and polish every frame to a broadcast-ready finish." },
+      { title: "Variations & Testing", text: "Multiple cuts and formats, so you can test hooks, angles and audiences across channels." },
     ],
-    work: ["zudo-app", "smashed-agency"],
+    work: ["zudo-app", "ode-songs"],
   },
   "Social Media Management": {
-    lead: "We build social presences",
-    tail: "that people choose to follow, not scroll past.",
+    seoTitle: "Social Media Management Services",
+    seoDescription:
+      "Strategy, content, publishing and community management that keep your brand consistent and growing on social. Social media done properly, by Zenkai Media.",
+    lead: "A social presence",
+    tail: "people choose to follow.",
     body:
-      "Social media is where your audience spends its attention every day. We plan what you say, when you say it and how it looks — then publish, engage and report, so your channels grow consistently instead of in bursts.",
+      "Social is where your audience spends its attention every day. We plan what your brand says, when it says it and how it looks — then produce, publish, engage and report, so your channels grow steadily instead of in bursts. Every post is made to feel like you, and to earn its place in the feed.",
     process: [
-      { title: "Audit & Strategy", text: "We review your channels, competitors and audience to define pillars, tone and the goal each platform should serve." },
-      { title: "Content Calendar", text: "A monthly plan of formats, topics and posting times, aligned with launches, campaigns and moments that matter." },
-      { title: "Create & Publish", text: "Posts, reels and stories are produced, captioned and scheduled — on brand, on time, every time." },
-      { title: "Engage & Report", text: "We manage comments and messages, track what performs and refine the plan every month." },
+      { title: "Audit & Strategy", text: "Channels, competitors and audience reviewed to define pillars, tone and each platform’s role." },
+      { title: "Content Calendar", text: "A monthly plan of formats, topics and timing, aligned with launches and the moments that matter." },
+      { title: "Create & Publish", text: "Posts, reels and stories produced, captioned and scheduled — on brand and on time." },
+      { title: "Engage & Report", text: "Comments and messages managed, performance tracked, and the plan refined every month." },
     ],
     work: ["zudo-app", "airblack"],
   },
   "Performance Marketing": {
-    lead: "We turn ad spend into",
-    tail: "measurable, profitable growth.",
+    seoTitle: "Performance Marketing Agency — Meta & Google Ads",
+    seoDescription:
+      "Meta and Google Ads campaigns built on clean tracking, structured testing and creative that converts. Performance marketing measured in revenue, not reach.",
+    lead: "Ad spend, turned into",
+    tail: "measurable growth.",
     body:
-      "Performance marketing is creative and data working together. We build, launch and optimise campaigns across Meta and Google — pairing sharp targeting and structured testing with ad creative designed to convert, so every rupee is accountable to a result.",
+      "Performance marketing works best when creative and data are built together. We plan, launch and optimise campaigns across Meta and Google — with reliable tracking, disciplined testing and ad creative made to convert — so every unit of spend is accountable to a result.",
     process: [
-      { title: "Audit & Goals", text: "We review your accounts, tracking and numbers to set clear targets for cost, volume and return." },
-      { title: "Campaign Build", text: "Audiences, account structure, tracking and ad creative are set up for clean data and scalable testing." },
+      { title: "Audit & Goals", text: "Accounts, tracking and numbers reviewed to set clear targets for cost, volume and return." },
+      { title: "Campaign Build", text: "Audiences, structure, tracking and creative set up for clean data and scalable testing." },
       { title: "Launch & Test", text: "Campaigns go live with structured tests on audiences, hooks and offers to find what wins." },
-      { title: "Optimise & Scale", text: "We cut what doesn't work, scale what does and report transparently on the metrics that matter." },
+      { title: "Optimise & Scale", text: "What underperforms is cut, what works is scaled, and results are reported transparently." },
     ],
-    work: ["smashed-agency", "ponds"],
+    work: ["ponds", "airblack"],
   },
   "Influencer Marketing": {
-    lead: "We connect brands with creators",
-    tail: "whose audiences already trust them.",
+    seoTitle: "Influencer Marketing Agency",
+    seoDescription:
+      "Creator partnerships that feel authentic and perform — strategy, creator selection, UGC and end-to-end campaign management by Zenkai Media.",
+    lead: "Creators your audience",
+    tail: "already trusts.",
     body:
-      "The right creator can introduce your brand more credibly than any ad. We find creators who genuinely fit, brief them clearly, manage every collaboration end to end and measure the impact — from UGC for your ads to full-scale campaigns.",
+      "The right creator introduces your brand more credibly than any ad. We find creators who genuinely fit, brief them clearly, manage every collaboration end to end and measure what it delivers — from UGC for your ads to multi-creator launch campaigns.",
     process: [
-      { title: "Strategy", text: "We define the campaign goal, the audience and the kind of creators and content that will move it." },
-      { title: "Creator Selection", text: "We shortlist and vet creators on fit, engagement quality and audience relevance — not just follower counts." },
-      { title: "Brief & Production", text: "Clear briefs, timelines and approvals keep content on-message while letting each creator's voice come through." },
-      { title: "Launch & Measure", text: "We coordinate go-live, amplify the best content and report on reach, engagement and results." },
+      { title: "Strategy", text: "The campaign goal, the audience, and the kind of creators and content that will move it." },
+      { title: "Creator Selection", text: "Creators vetted on fit, engagement quality and audience relevance — not follower counts alone." },
+      { title: "Brief & Production", text: "Clear briefs, timelines and approvals keep content on-message while each creator’s voice comes through." },
+      { title: "Launch & Measure", text: "Go-live coordinated, the best content amplified, and reach, engagement and results reported." },
     ],
     work: ["ponds", "zudo-app"],
   },
   "Branding & Design": {
-    lead: "We shape identities",
-    tail: "that are clear, distinctive and built to last.",
+    seoTitle: "Branding & Design Agency — Brand Identity & Logo Design",
+    seoDescription:
+      "Brand identity, logo design and visual systems for businesses that want to be recognised. Strategy-led branding from Zenkai Media, Ahmedabad.",
+    lead: "Identities that are clear,",
+    tail: "distinctive and built to last.",
     body:
-      "A brand is more than a logo. We define how your business looks and feels — from the core identity and logo to everyday marketing creatives — so every touchpoint is recognisably yours and works together as one system.",
+      "A brand is more than a logo. We define how your business looks, sounds and feels — from positioning and identity to the everyday creative that carries it — so every touchpoint is recognisably yours. Our branding team in Ahmedabad works with businesses across India and internationally, building systems that stay consistent as you grow.",
     process: [
-      { title: "Discovery", text: "We learn your business, audience and competitors to find what makes you genuinely different." },
-      { title: "Concept", text: "Visual directions are explored and presented with clear reasoning behind every choice." },
-      { title: "Identity System", text: "Logo, colour, typography and graphic language are refined into a flexible, cohesive system." },
-      { title: "Guidelines & Rollout", text: "We deliver guidelines and ready-to-use assets so your brand stays consistent as it grows." },
+      { title: "Discovery", text: "Your business, audience and competitors, studied to find what makes you genuinely different." },
+      { title: "Concept", text: "Visual directions explored and presented with clear reasoning behind every choice." },
+      { title: "Identity System", text: "Logo, colour, typography and graphic language refined into one flexible system." },
+      { title: "Guidelines & Rollout", text: "Guidelines and ready-to-use assets, so the brand stays consistent wherever it appears." },
     ],
     work: ["airblack", "ponds"],
   },
   "Web Development": {
-    lead: "We build fast, conversion-focused websites",
-    tail: "that give your brand a home to grow.",
+    seoTitle: "Web Development — Websites, E-commerce & Custom Software",
+    seoDescription:
+      "Fast, conversion-focused websites, e-commerce stores and custom business software — including AI-powered tools and automation. Built by Zenkai Media.",
+    lead: "Websites and software",
+    tail: "built around how you work.",
     body:
-      "Your website is often the first real conversation with a customer. We design and build business sites, landing pages and online stores that load fast, read clearly and turn visitors into enquiries and sales — then keep them secure and up to date.",
+      "Your website is often the first real conversation with a customer. We design and build business websites, landing pages and online stores that load fast, read clearly and convert — and, for businesses with specific operational needs, custom software such as CRMs, internal tools, AI-powered dashboards and workflow automation, designed around the way you already work. Built by our team in Ahmedabad, for clients everywhere.",
     process: [
-      { title: "Plan", text: "We map goals, pages and user journeys, and agree on structure and content before any design starts." },
-      { title: "Design", text: "Layouts and interactions are designed around your brand and the actions you want visitors to take." },
-      { title: "Build", text: "We develop a fast, responsive, SEO-ready site, tested across devices and browsers." },
-      { title: "Launch & Care", text: "We handle go-live, then provide updates, monitoring and maintenance to keep it performing." },
+      { title: "Plan", text: "Goals, users and journeys mapped, with structure and content agreed before design begins." },
+      { title: "Design", text: "Interfaces designed around your brand and the actions you want people to take." },
+      { title: "Build", text: "Fast, responsive, SEO-ready development, tested across devices and browsers." },
+      { title: "Launch & Care", text: "Go-live handled, then updates, monitoring and maintenance to keep it performing." },
     ],
-    work: ["smashed-agency", "zudo-app"],
+    work: ["zudo-app", "ode-songs"],
   },
 };
 
@@ -130,8 +155,8 @@ const HERO_IMAGES: Record<string, string> = {
   "Social Media Management": "/services/socialmediamanagement.webp",
   "Performance Marketing": "/services/performancemarketing.webp",
   "Influencer Marketing": "/services/influencermarketing.webp",
-  "Branding & Design": "/services/brandingdesign.png",
-  "Web Development": "/services/webdevelopment.png",
+  "Branding & Design": "/services/brandingdesign.webp",
+  "Web Development": "/services/webdevelopment.webp",
 };
 
 export type ServicePage = Service & Detail & { slug: string; href: string; hero: string };

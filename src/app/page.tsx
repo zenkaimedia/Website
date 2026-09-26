@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import HomeNav from "@/components/home/HomeNav";
+import { pageMetadata } from "@/lib/seo";
 import ContactForm from "@/components/home/ContactForm";
 import Logo3D from "@/components/home/Logo3D";
 import MobileHero from "@/components/home/MobileHero";
@@ -15,6 +17,14 @@ import ScrollIndicator from "@/components/home/ScrollIndicator";
 import { CTA_BASE, CTA_ARROW } from "@/components/home/cta";
 import PageContainer from "@/components/home/PageContainer";
 import FooterWordmark from "@/components/home/FooterWordmark";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Zenkai Media — Creative, Video & AI Production Agency in India",
+  description:
+    "Creative growth agency from Ahmedabad, India, working with brands worldwide — creative and video production, AI creative, branding, web and performance marketing.",
+  path: "/",
+  absoluteTitle: true,
+});
 
 const BOOKING_URL = "https://zenkaimedia.dayschedule.com/free-discovery-call";
 

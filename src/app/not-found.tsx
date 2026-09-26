@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import HomeNav from "@/components/home/HomeNav";
 import PageContainer from "@/components/home/PageContainer";
 import { Arrow } from "@/components/home/Arrow";
@@ -37,6 +38,12 @@ function DotDigit({ d }: { d: string }) {
     </svg>
   );
 }
+
+/* 404s keep their own title and stay out of search results. */
+export const metadata: Metadata = {
+  title: "Page not found",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

@@ -141,3 +141,9 @@ export const POSTS: Post[] = [
 export const CATEGORIES = Array.from(
   new Set(POSTS.map((p) => p.category).filter(Boolean))
 );
+
+/** A post's date ("DD/MM/YYYY") as ISO "YYYY-MM-DD" for metadata and schema. */
+export function postIsoDate(date: string): string {
+  const [d, m, y] = date.split("/");
+  return `${y}-${m.padStart(2, "0")}-${d.padStart(2, "0")}`;
+}

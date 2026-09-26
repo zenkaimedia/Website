@@ -62,6 +62,7 @@ function ServiceCard({ service }: { service: Service }) {
           blur sits on a wrapper because the theme-flip rule owns the photo's
           own `filter`. */}
       <div className="absolute inset-0 transition-[filter,scale] duration-[250ms] ease-out will-change-[filter] group-hover:scale-[1.04] group-hover:blur-[16px]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={service.image}
           alt={service.title}

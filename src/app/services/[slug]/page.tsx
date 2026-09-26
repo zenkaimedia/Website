@@ -7,6 +7,9 @@ import ServicePageEnd from "@/components/home/ServicePageEnd";
 import { DotChevron, DotProcessIcon } from "@/components/home/DotIcons";
 import { SERVICE_PAGES, getServicePage } from "@/components/home/serviceDetails";
 import { subServiceHref } from "@/components/home/subServiceDetails";
+import JsonLd from "@/components/seo/JsonLd";
+import { ogImage, pageMetadata } from "@/lib/seo";
+import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import { getWork, type Work } from "@/components/home/portfolio";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -21,11 +24,12 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const s = getServicePage((await params).slug);
   if (!s) return {};
-  return {
-    title: `${s.title} — Zenkai Media`,
-    description: s.description,
-    openGraph: { images: [s.hero] },
-  };
+  return pageMetadata({
+    title: s.seoTitle,
+    description: s.seoDescription,
+    path: s.href,
+    image: ogImage(`service-${s.slug}`),
+  });
 }
 
 /* Layout measured off the reference service page at 1920 (rem = px ÷ 16):
@@ -43,6 +47,22 @@ export default async function ServiceDetailPage({ params }: Params) {
 
   return (
     <main className="bg-[#ffffff] font-body">
+      <JsonLd
+        data={[
+          serviceSchema({
+            name: s.title,
+            description: s.seoDescription,
+            path: s.href,
+            image: s.hero,
+            offers: s.includes,
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: s.title, path: s.href },
+          ]),
+        ]}
+      />
       <HomeNav />
 
       <InvertShell>

@@ -70,6 +70,9 @@ export default function HomeNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  // Becomes true the first time the Services menu opens; until then the
+  // cards' banner images aren't requested, so no page pays for a hidden menu.
+  const [servicesPrimed, setServicesPrimed] = useState(false);
   const [mobileSub, setMobileSub] = useState(false); // mobile "Services" submenu
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -88,6 +91,7 @@ export default function HomeNav() {
   function openServices() {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setServicesOpen(true);
+    setServicesPrimed(true);
   }
   function scheduleCloseServices() {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -110,7 +114,7 @@ export default function HomeNav() {
       <div
         aria-hidden="true"
         className={`absolute inset-0 scale-105 bg-cover bg-center opacity-0 transition-[opacity,transform] duration-[600ms] ${EASE} group-hover/card:scale-100 group-hover/card:opacity-100`}
-        style={{ backgroundImage: `url('${serviceHeroImage(service.title)}')` }}
+        style={servicesPrimed ? { backgroundImage: `url('${serviceHeroImage(service.title)}')` } : undefined}
       />
       {/* Legibility overlay */}
       <div

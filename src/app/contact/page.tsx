@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import HomeNav from "@/components/home/HomeNav";
 import ContactForm from "@/components/home/ContactForm";
 import PageContainer from "@/components/home/PageContainer";
 
-export const metadata: Metadata = {
-  title: "Contact — Zenkai Media",
+export const metadata: Metadata = pageMetadata({
+  title: "Contact — Start a Project",
   description:
-    "Get in touch with Zenkai Media — tell us about your project and we'll get back to you.",
-};
+    "Tell us about your project. Zenkai Media works with brands worldwide from Ahmedabad, India — Monday to Saturday, 10am to 6pm IST.",
+  path: "/contact",
+});
 
 const SOCIALS = [
   { label: "Instagram", href: "https://www.instagram.com/zenkaimedia.in" },

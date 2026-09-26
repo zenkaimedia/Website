@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/seo/JsonLd";
+import { ogImage, pageMetadata } from "@/lib/seo";
+import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import { notFound } from "next/navigation";
 import HomeNav from "@/components/home/HomeNav";
 import InvertShell from "@/components/home/InvertShell";
@@ -9,7 +12,7 @@ import FooterWordmark from "@/components/home/FooterWordmark";
 import PageContainer from "@/components/home/PageContainer";
 import { Arrow } from "@/components/home/Arrow";
 import { CTA_ARROW } from "@/components/home/cta";
-import { POSTS } from "@/components/home/insights";
+import { POSTS, postIsoDate } from "@/components/home/insights";
 
 const SOCIALS = [
   { label: "Instagram", href: "https://www.instagram.com/zenkaimedia.in" },
@@ -28,10 +31,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = POSTS.find((p) => p.slug === slug);
-  return {
-    title: post ? `${post.title} — Zenkai Media` : "Insights — Zenkai Media",
-    description: post?.excerpt,
-  };
+  if (!post) return {};
+  return pageMetadata({
+    title: post.title,
+    description: post.excerpt,
+    path: post.href,
+    image: ogImage(`post-${post.slug}`),
+    type: "article",
+    publishedTime: postIsoDate(post.date),
+  });
 }
 
 export default async function ArticlePage({
@@ -47,6 +55,22 @@ export default async function ArticlePage({
 
   return (
     <main className="bg-[#ffffff] font-body">
+      <JsonLd
+        data={[
+          articleSchema({
+            title: post.title,
+            description: post.excerpt,
+            path: post.href,
+            image: post.image,
+            date: postIsoDate(post.date),
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Insights", path: "/insights" },
+            { name: post.title, path: post.href },
+          ]),
+        ]}
+      />
       <HomeNav />
 
       {/* Article + outro share the reversible light↔dark theme. */}

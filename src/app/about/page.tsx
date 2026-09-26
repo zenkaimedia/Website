@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import HomeNav from "@/components/home/HomeNav";
 import MobileFlipProvider from "@/components/home/MobileFlip";
 import AboutShowcase from "@/components/home/AboutShowcase";
@@ -11,11 +12,13 @@ import PageContainer from "@/components/home/PageContainer";
 import { Arrow } from "@/components/home/Arrow";
 import { CTA_ARROW } from "@/components/home/cta";
 
-export const metadata: Metadata = {
-  title: "About — Zenkai Media",
+export const metadata: Metadata = pageMetadata({
+  title: "About Zenkai Media — Creative Growth Agency Since 2020",
   description:
-    "Zenkai Media is a creative growth agency — branding, AI video, performance creative, video production, web development, and digital marketing. 500+ projects across 20+ industries, for brands in India and worldwide.",
-};
+    "Zenkai Media is a creative growth agency from Ahmedabad, India, founded in 2020 — creative, strategy and technology under one roof for brands worldwide.",
+  path: "/about",
+  absoluteTitle: true,
+});
 
 const SOCIALS = [
   { label: "Instagram", href: "https://www.instagram.com/zenkaimedia.in" },

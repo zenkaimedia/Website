@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import HomeNav from "@/components/home/HomeNav";
 import InvertShell from "@/components/home/InvertShell";
 import ServicesOutro from "@/components/home/ServicesOutro";
@@ -10,11 +11,12 @@ import PageContainer from "@/components/home/PageContainer";
 import { Arrow } from "@/components/home/Arrow";
 import { CTA_ARROW } from "@/components/home/cta";
 
-export const metadata: Metadata = {
-  title: "Insights — Zenkai Media",
+export const metadata: Metadata = pageMetadata({
+  title: "Insights — Creative, AI & Marketing Thinking",
   description:
-    "Perspective on the subjects that shape our work — strategy, identity, design systems, digital products, and the craft of building things that last.",
-};
+    "Perspectives from Zenkai Media on creative production, AI video, branding, performance creative, web and the systems that help brands grow.",
+  path: "/insights",
+});
 
 const SOCIALS = [
   { label: "Instagram", href: "https://www.instagram.com/zenkaimedia.in" },

@@ -6,7 +6,7 @@ import PageContainer from "./PageContainer";
 import { revealLines } from "@/components/ui/PageTransitionController";
 import { useSetMobileDark } from "./MobileFlip";
 
-const GIF_URL = "/assets/portfolio/showcasegif.gif";
+const GIF_URL = "/assets/portfolio/showcase.webp"; // animated WebP (was a 1.5 MB GIF)
 const MOBILE_SHOWCASE = "/assets/portfolio/mobileshowcaseimg.webp";
 
 /* Shared timing for the mobile light↔dark theme flip. */
@@ -187,6 +187,7 @@ export default function ApproachShowcase() {
               style={{ width, height }}
               className="overflow-hidden rounded-[1.5rem] bg-black shadow-2xl"
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={GIF_URL}
                 alt="Zenkai work showcase"

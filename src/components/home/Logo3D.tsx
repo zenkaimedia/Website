@@ -3,7 +3,6 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 
 // Drop your Blender export here: public/models/zenkai-logo.glb
@@ -62,13 +61,10 @@ export default function Logo3D({
     rim.position.set(-3, -1, 2);
     scene.add(rim);
 
-    // DRACOLoader is only needed if you exported with Draco compression.
-    // Harmless to leave attached either way — GLTFLoader only invokes it
-    // for meshes that are actually Draco-compressed.
-    const draco = new DRACOLoader();
-    draco.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
+    // The model isn't Draco-compressed, so no decoder is attached (keeps the
+    // bundle smaller and avoids a third-party CDN). If a Draco-compressed
+    // export is ever used, add DRACOLoader with a self-hosted decoder path.
     const loader = new GLTFLoader();
-    loader.setDRACOLoader(draco);
 
     let model: THREE.Object3D | null = null;
     let baseY = 0; // recentered vertical position; the idle float adds to this
@@ -220,7 +216,6 @@ export default function Logo3D({
       });
       pmrem.dispose();
       renderer.dispose();
-      draco.dispose();
       if (renderer.domElement.parentNode === mount) {
         mount.removeChild(renderer.domElement);
       }

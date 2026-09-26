@@ -59,7 +59,8 @@ export default function ServicesDirectory() {
                   {isLast && (
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img
-                      src="/assets/general/metapartnerbadge.png"
+                      src="/assets/general/metapartnerbadge.webp"
+                      loading="lazy"
                       alt="Meta Partner"
                       className="hidden w-[13.5rem] md:mt-auto md:block"
                     />
@@ -99,7 +100,8 @@ export default function ServicesDirectory() {
                 {isLast && (
                   /* eslint-disable-next-line @next/next/no-img-element */
                   <img
-                    src="/assets/general/metapartnerbadge.png"
+                    src="/assets/general/metapartnerbadge.webp"
+                      loading="lazy"
                     alt="Meta Partner"
                     className="mt-4 w-[clamp(11rem,48vw,13.5rem)] md:hidden"
                   />

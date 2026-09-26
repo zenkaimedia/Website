@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/seo/JsonLd";
+import { ogImage, pageMetadata } from "@/lib/seo";
+import { breadcrumbSchema, creativeWorkSchema } from "@/lib/schema";
 import { notFound } from "next/navigation";
 import HomeNav from "@/components/home/HomeNav";
 import InvertShell from "@/components/home/InvertShell";
@@ -24,11 +27,12 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const work = getWork((await params).slug);
   if (!work) return {};
-  return {
-    title: `${work.title} — Zenkai Media`,
-    description: work.description,
-    openGraph: { images: [work.image] },
-  };
+  return pageMetadata({
+    title: `${work.title} Case Study — ${work.services[0]}`,
+    description: work.description.length > 160 ? `${work.description.slice(0, 157).trimEnd()}…` : work.description,
+    path: work.href,
+    image: ogImage(`work-${work.slug}`),
+  });
 }
 
 const SOCIALS = [
@@ -46,6 +50,16 @@ export default async function ProjectPage({ params }: Params) {
 
   return (
     <main className="bg-[#ffffff] font-body">
+      <JsonLd
+        data={[
+          creativeWorkSchema({ name: work.title, description: work.description, path: work.href, image: work.image }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Portfolio", path: "/portfolio" },
+            { name: work.title, path: work.href },
+          ]),
+        ]}
+      />
       <HomeNav />
 
       {/* Case study + next projects + outro share the light↔dark theme. */}

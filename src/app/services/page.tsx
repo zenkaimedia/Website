@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import HomeNav from "@/components/home/HomeNav";
 import ContactForm from "@/components/home/ContactForm";
 import FooterWordmark from "@/components/home/FooterWordmark";
@@ -13,11 +14,12 @@ import { subServiceHref } from "@/components/home/subServiceDetails";
 import { CTA_ARROW } from "@/components/home/cta";
 import { SERVICES, DotServiceIcon, type Service } from "@/components/home/services";
 
-export const metadata: Metadata = {
-  title: "Services — Zenkai Media",
+export const metadata: Metadata = pageMetadata({
+  title: "Services — Creative, AI, Branding, Web & Marketing",
   description:
-    "Everything Zenkai offers, from creative production and AI studio work to performance marketing, branding, and web development.",
-};
+    "Creative and video production, AI creative, social media, performance marketing, influencer marketing, branding and web development — all under one roof.",
+  path: "/services",
+});
 
 const BOOKING_URL = "https://zenkaimedia.dayschedule.com/free-discovery-call";
 

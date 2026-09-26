@@ -12,31 +12,38 @@ type Testimonial = {
 const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "We wanted to sincerely thank you for being part of the birth and realization of our private spa project in Brussels. Your attention to detail was remarkable and, at times, felt like a real achievement! From our logo to our website and the entire branding experience, every element was thoughtfully crafted and aligned with what we had envisioned & sometimes even better than we could have imagined ourselves.",
-    name: "Esra & Olivier",
-    role: "Founders, Neva Spa",
-    initials: "EO",
+      "Zenkai was quick to understand what we needed and equally quick with execution. The team was easy to work with, responsive to feedback, and consistently delivered quality work. Overall, a smooth experience from brief to final delivery.",
+    name: "Airblack",
+    role: "Team, Airblack",
+    initials: "A",
   },
   {
     quote:
-      "You've created a true work of art that perfectly captures the idea of an emotional connection with the customer. Your work exceeded our expectations, and this was echoed by everyone on the team. Every element of the design reflects a genuine love for animals and a high level of professionalism. Everything has been thought through down to the smallest detail and contributes to creating a strong emotional response from the consumer. We're truly happy we had the opportunity to work with you on this project and hope to collaborate again in the future.",
-    name: "Duo Nutrition",
-    role: "Team, DUO Nutrition",
-    initials: "DN",
+      "We wanted our digital presence to feel modern, premium and easy to navigate. Zenkai handled the design and development with a good understanding of both the visual and functional side. The final website felt much more aligned with where we wanted the brand to go.",
+    name: "Vijay Dudhat",
+    role: "Founder, Vitalspace",
+    initials: "VD",
   },
   {
     quote:
-      "We're glad we found you and waited for your availability, I'm sure we'll work together again soon. The process was smooth and you understood what we wanted to achieve, so we're really happy.",
-    name: "Miguel",
-    role: "Founder, Lunna",
-    initials: "M",
+      "What stood out with Zenkai was their ability to bring creative ideas into the project without losing the core message. The content felt fresh, engaging and suited to our audience. They were also open to experimenting, which made the process more productive.",
+    name: "Zudo App",
+    role: "Team, Zudo App",
+    initials: "ZA",
   },
   {
     quote:
-      "Zenkai Media brings a rare mix of exceptional talent and true collaboration. Their design work is best-in-class, defined by sharp taste and a distinct point of view. Chandni has been a pleasure to work with and is a partner we're excited to keep building with.",
-    name: "Johnny Tran",
-    role: "Founder, Vora",
-    initials: "JT",
+      "Zenkai paid close attention to the details that make a brand feel consistent. From the visual direction to the final creative output, they maintained a strong sense of quality while staying true to the brief. It was a good experience working with the team.",
+    name: "Haji Ajmal Ali",
+    role: "Founder, Ajmal",
+    initials: "HA",
+  },
+  {
+    quote:
+      "Zenkai didn’t approach the work as just another creative project. They took the time to understand the brand, the audience and what we were trying to achieve. That thinking reflected in the final work and made the overall collaboration much more valuable.",
+    name: "Paper Boat",
+    role: "Team, Paper Boat",
+    initials: "PB",
   },
 ];
 

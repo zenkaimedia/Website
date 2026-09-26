@@ -2,10 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 import PageContainer from "./PageContainer";
 
-/* "We're working with brands like" — two endless logo rows: public/brands/
-   line-1 drifts right→left, public/brands/line-2 left→right. Files are read
-   at build time, so dropping a logo into either folder adds it (sorted by
-   file name). Each logo sits on a uniform white tile in its own colours, so
+/* "We're working with brands like" — two endless logo rows, the first
+   drifting right→left, the second left→right. Every logo in public/brands is
+   read at build time (sorted by file name) and dealt alternately into the
+   two rows — 1st, 3rd, 5th… on top, 2nd, 4th, 6th… below — so the rows
+   never share a logo and stay balanced as more files are added. Each logo sits on a uniform white tile in its own colours, so
    logos with white, black or transparent backgrounds all read cleanly; the
    tile is part of the <img> (flip-photo) so it stays white through the
    mobile theme flip. */
@@ -13,16 +14,22 @@ const LOGO_EXT = /\.(webp|png|jpe?g|svg|avif)$/i;
 
 type Logo = { src: string; alt: string };
 
-function readLogos(folder: string): Logo[] {
-  const dir = path.join(process.cwd(), "public", "brands", folder);
+function readLogos(): Logo[] {
+  const dir = path.join(process.cwd(), "public", "brands");
   let files: string[] = [];
   try {
-    files = fs.readdirSync(dir).filter((f) => LOGO_EXT.test(f)).sort();
+    files = fs
+      .readdirSync(dir, { withFileTypes: true })
+      .filter((e) => e.isFile() && LOGO_EXT.test(e.name))
+      .map((e) => e.name)
+      .sort();
   } catch {
     return [];
   }
+  // `?v=` is the file's modified time, so replacing a logo under the same
+  // name busts the browser cache and the new artwork shows immediately.
   return files.map((f) => ({
-    src: `/brands/${folder}/${encodeURIComponent(f)}`,
+    src: `/brands/${encodeURIComponent(f)}?v=${Math.round(fs.statSync(path.join(dir, f)).mtimeMs)}`,
     alt: f.replace(LOGO_EXT, "").replace(/[-_]+/g, " "),
   }));
 }
@@ -58,9 +65,12 @@ function Row({ logos, reverse }: { logos: Logo[]; reverse?: boolean }) {
 }
 
 export default function BrandsMarquee() {
-  const line1 = readLogos("line-1");
-  const line2 = readLogos("line-2");
-  if (line1.length === 0 && line2.length === 0) return null;
+  const logos = readLogos();
+  if (logos.length === 0) return null;
+  // Deal alternately so the two rows hold different logos. With a single
+  // logo there's nothing to split, so only the top row shows.
+  const line1 = logos.filter((_, i) => i % 2 === 0);
+  const line2 = logos.filter((_, i) => i % 2 === 1);
 
   return (
     <section className="bg-[#000000] pb-[80px] md:pb-28">

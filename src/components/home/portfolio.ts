@@ -35,16 +35,17 @@ const INPUT: WorkInput[] = [
     industry: "EdTech",
     services: ["Creative Production"],
   },
-  {
-    slug: "smashed-agency",
-    title: "Smashed Agency",
-    image: "/assets/portfolio/smashedagency.webp",
-    description:
-      "Smashed Agency is a performance marketing agency helping DTC brands scale through creative strategy, performance advertising, and media buying. We worked with the team on creative production, translating performance-focused ideas into sharp, platform-ready content built to capture attention and communicate with modern DTC audiences.",
-    location: "India",
-    industry: "DTC / Performance Marketing",
-    services: ["Creative Production"],
-  },
+  // Smashed Agency — hidden for now; uncomment to bring it back.
+  // {
+  //   slug: "smashed-agency",
+  //   title: "Smashed Agency",
+  //   image: "/assets/portfolio/smashedagency.webp",
+  //   description:
+  //     "Smashed Agency is a performance marketing agency helping DTC brands scale through creative strategy, performance advertising, and media buying. We worked with the team on creative production, translating performance-focused ideas into sharp, platform-ready content built to capture attention and communicate with modern DTC audiences.",
+  //   location: "India",
+  //   industry: "DTC / Performance Marketing",
+  //   services: ["Creative Production"],
+  // },
   {
     slug: "ponds",
     title: "POND’S",

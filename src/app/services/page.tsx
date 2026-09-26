@@ -64,11 +64,11 @@ const CATEGORIES: {
     titles: ["Performance Marketing", "Influencer Marketing"],
   },
   {
-    name: "Brand & Web",
+    name: "Brand & Technology",
     image: "/assets/hero_service_section_images/brandingdesign.webp",
     description:
-      "Distinctive brand identities and fast, conversion-focused websites that give your business a memorable presence and a platform to grow.",
-    titles: ["Branding & Design", "Web Development"],
+      "Distinctive brand identities, conversion-focused websites and custom AI-powered software — the presence, platforms and systems your business grows on.",
+    titles: ["Branding & Design", "Web Development", "Custom AI Solutions"],
   },
 ];
 

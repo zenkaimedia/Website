@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { BLANK_IMG, DESKTOP } from "./mediaOnly";
 
 /* Full-screen swipeable image carousel — the mobile home hero. Auto-advances
    with a segmented progress bar; swipe or tap a segment to jump. */
@@ -58,13 +59,16 @@ export default function MobileHero({ className = "" }: { className?: string }) {
             }`}
           aria-hidden={i !== active}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={s.image}
-            alt={s.title}
-            className="h-full w-full object-cover"
-            draggable={false}
-          />
+          {/* Mobile-only: blank on desktop so the photo is never downloaded there. */}
+          <picture className="contents">
+            <source media={DESKTOP} srcSet={BLANK_IMG} />
+            <img
+              src={s.image}
+              alt={s.title}
+              className="h-full w-full object-cover"
+              draggable={false}
+            />
+          </picture>
         </div>
       ))}
 

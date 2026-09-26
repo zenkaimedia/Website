@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useMotionTemplate, useInView } from "m
 import PageContainer from "./PageContainer";
 import { revealLines } from "@/components/ui/PageTransitionController";
 import { useSetMobileDark } from "./MobileFlip";
+import { BLANK_IMG, DESKTOP, MOBILE } from "./mediaOnly";
 
 const GIF_URL = "/assets/portfolio/showcase.webp"; // animated WebP (was a 1.5 MB GIF)
 const MOBILE_SHOWCASE = "/assets/portfolio/mobileshowcaseimg.webp";
@@ -187,12 +188,16 @@ export default function ApproachShowcase() {
               style={{ width, height }}
               className="overflow-hidden rounded-[1.5rem] bg-black shadow-2xl"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={GIF_URL}
-                alt="Zenkai work showcase"
-                className="h-full w-full object-cover"
-              />
+              {/* Desktop-only: blank on phones so the animation is never downloaded there. */}
+              <picture className="contents">
+                <source media={MOBILE} srcSet={BLANK_IMG} />
+                <img
+                  src={GIF_URL}
+                  loading="lazy"
+                  alt="Zenkai work showcase"
+                  className="h-full w-full object-cover"
+                />
+              </picture>
             </motion.div>
           </PageContainer>
         </motion.div>
@@ -204,12 +209,16 @@ export default function ApproachShowcase() {
              shell img` so the shell's invert cancels on the image itself. ──── */}
       <div ref={mobileRef} className="px-5 pb-16 sm:px-6 md:hidden">
         <div className="mx-auto max-w-7xl overflow-hidden rounded-2xl shadow-lg">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={MOBILE_SHOWCASE}
-            alt="Zenkai work showcase"
-            className="flip-photo aspect-[2/3] w-full object-cover object-center"
-          />
+          {/* Mobile-only: blank on desktop so the photo is never downloaded there. */}
+          <picture className="contents">
+            <source media={DESKTOP} srcSet={BLANK_IMG} />
+            <img
+              src={MOBILE_SHOWCASE}
+              loading="lazy"
+              alt="Zenkai work showcase"
+              className="flip-photo aspect-[2/3] w-full object-cover object-center"
+            />
+          </picture>
         </div>
       </div>
     </section>

@@ -1,5 +1,3 @@
-import type { ReactNode } from "react";
-
 export type ServiceIconName =
   | "production"
   | "ai"
@@ -7,7 +5,8 @@ export type ServiceIconName =
   | "performance"
   | "influencer"
   | "branding"
-  | "web";
+  | "web"
+  | "automation";
 
 export type Service = {
   title: string;
@@ -106,77 +105,21 @@ export const SERVICES: Service[] = [
     icon: "web",
     image: "/assets/hero_service_section_images/webdevelopment.webp",
   },
+  {
+    title: "Custom AI Solutions",
+    description:
+      "Custom CRMs, internal tools, AI dashboards and automation built around how your business already works.",
+    includes: [
+      "Custom CRM Systems",
+      "Internal Management Tools",
+      "Workflow Automation",
+      "AI-Powered Dashboards",
+      "Custom Business Software",
+    ],
+    icon: "automation",
+    image: "/assets/hero_service_section_images/customaisolutions.webp",
+  },
 ];
-
-const ICON_PATHS: Record<ServiceIconName, ReactNode> = {
-  production: (
-    <>
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <path d="m10 9 5 3-5 3z" />
-    </>
-  ),
-  ai: (
-    <>
-      <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
-      <path d="M12 7.5 13.6 11 17 12l-3.4 1L12 16.5 10.4 13 7 12l3.4-1z" />
-    </>
-  ),
-  social: (
-    <>
-      <path d="M21 11.5a8 8 0 0 1-11.9 7L3 20.5l2-6.1A8 8 0 1 1 21 11.5z" />
-    </>
-  ),
-  performance: (
-    <>
-      <path d="M3 17l6-6 4 4 8-8" />
-      <path d="M21 7v5h-5" />
-    </>
-  ),
-  influencer: (
-    <>
-      <circle cx="9" cy="8" r="3" />
-      <path d="M3.5 20a5.5 5.5 0 0 1 11 0" />
-      <path d="M16 5.5a3 3 0 0 1 0 5.8" />
-      <path d="M18.5 20a5 5 0 0 0-3-4.6" />
-    </>
-  ),
-  branding: (
-    <>
-      <path d="M12 20h9" />
-      <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z" />
-    </>
-  ),
-  web: (
-    <>
-      <rect x="3" y="4" width="18" height="16" rx="2" />
-      <path d="M3 9h18" />
-      <path d="m9 13.5-2 2 2 2M15 13.5l2 2-2 2" />
-    </>
-  ),
-};
-
-export function ServiceIcon({
-  name,
-  className = "h-5 w-5",
-}: {
-  name: ServiceIconName;
-  className?: string;
-}) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      {ICON_PATHS[name]}
-    </svg>
-  );
-}
 
 /* Dot-matrix ("dotted") glyphs — the site's signature dot theme. Each is a 5×5
    bitmap where "1" is a filled dot; rendered as SVG circles. Used on the
@@ -194,6 +137,8 @@ const DOT_GLYPHS: Record<ServiceIconName, string[]> = {
   branding: ["00011000", "00011000", "00100100", "11011011", "11011011", "00100100", "00011000", "00011000"],
   // Reference terminal prompt ">_" (8×8, 22 dots).
   web: ["10000000", "11000000", "01100000", "00110000", "00110000", "01100000", "11001111", "10001111"],
+  // Chip: outlined body with pins on every side and a 2×2 core (8×8, 32 dots).
+  automation: ["00100100", "01111110", "11000011", "01011010", "01011010", "11000011", "01111110", "00100100"],
 };
 
 /* Dot radius as a fraction of the grid step. The 8-wide glyphs above use the
@@ -204,6 +149,7 @@ const DOT_RATIO: Partial<Record<ServiceIconName, number>> = {
   performance: 0.44,
   branding: 0.44,
   web: 0.44,
+  automation: 0.44,
 };
 
 export function DotServiceIcon({

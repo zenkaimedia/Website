@@ -145,6 +145,22 @@ const DETAILS: Record<string, Detail> = {
     ],
     work: ["zudo-app", "ode-songs"],
   },
+  "Custom AI Solutions": {
+    seoTitle: "Custom AI Solutions & Business Automation",
+    seoDescription:
+      "Custom CRMs, internal tools, AI-powered dashboards and workflow automation, built around how your business already works. Custom AI solutions by Zenkai Media.",
+    lead: "Software shaped around your business,",
+    tail: "not the other way round.",
+    body:
+      "Off-the-shelf platforms force teams to bend their processes to fit. We build the opposite: custom CRMs, internal management tools, AI-powered dashboards and workflow automation designed around the way your business already runs. From our team in Ahmedabad, we work with companies in India and internationally to remove manual work, connect scattered data and give decision-makers a clear view of the business.",
+    process: [
+      { title: "Process Mapping", text: "We study how your team works today — the tools, the hand-offs and where time and data get lost." },
+      { title: "Solution Design", text: "Workflows, data models and interfaces designed around your process, with AI used where it genuinely helps." },
+      { title: "Build & Integrate", text: "Secure, scalable software built in stages and connected to the tools you already use." },
+      { title: "Launch & Evolve", text: "Rollout, team onboarding and ongoing improvements as your operations and needs grow." },
+    ],
+    work: [],
+  },
 };
 
 /* Wide hero banners (public/services/), keyed by title. A service without an
@@ -157,6 +173,7 @@ const HERO_IMAGES: Record<string, string> = {
   "Influencer Marketing": "/services/influencermarketing.webp",
   "Branding & Design": "/services/brandingdesign.webp",
   "Web Development": "/services/webdevelopment.webp",
+  "Custom AI Solutions": "/services/customaisolutions.webp",
 };
 
 export type ServicePage = Service & Detail & { slug: string; href: string; hero: string };

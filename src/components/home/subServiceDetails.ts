@@ -471,6 +471,83 @@ const SUB_DETAILS: Record<string, SubDetail> = {
       { title: "Content Updates", text: "Text, image and page changes on request." },
     ],
   },
+
+  /* ------------------------------------------------ Custom AI Solutions */
+  "Custom CRM Systems": {
+    seoTitle: "Custom CRM Development",
+    seoDescription:
+      "Custom CRM systems built around your sales and client process — pipelines, automation and reporting that fit how your team actually works. By Zenkai Media.",
+    lead: "A CRM",
+    tail: "built around your pipeline",
+    body: "Generic CRMs make your team adapt to the software. We build CRM systems around your actual sales and client process — your stages, your data, your follow-ups — with automation and reporting that fit how you work.",
+    included: [
+      { title: "Pipeline Design", text: "Stages, fields and views modelled on your real sales process." },
+      { title: "Lead & Client Records", text: "One clean record of every lead, client and conversation." },
+      { title: "Automated Follow-Ups", text: "Reminders, tasks and messages triggered at the right moment." },
+      { title: "Integrations", text: "Connected to your website forms, WhatsApp, email and ads." },
+      { title: "Reporting", text: "Clear views of conversion, revenue and team performance." },
+    ],
+  },
+  "Internal Management Tools": {
+    seoTitle: "Internal Management Tools & Business Software",
+    seoDescription:
+      "Internal tools for operations, inventory, teams and approvals — replacing spreadsheets and scattered apps with one system built for your business.",
+    lead: "Internal tools",
+    tail: "that replace the spreadsheets",
+    body: "Most teams run on a patchwork of spreadsheets, chats and disconnected apps. We build internal management tools — for operations, inventory, teams and approvals — that bring it into one system designed for your business.",
+    included: [
+      { title: "Operations Portals", text: "Day-to-day work tracked and managed in one place." },
+      { title: "Inventory & Orders", text: "Stock, orders and fulfilment kept accurate in real time." },
+      { title: "Team & Task Management", text: "Assignments, approvals and progress everyone can see." },
+      { title: "Roles & Permissions", text: "The right access for every person and department." },
+      { title: "Data Migration", text: "Existing spreadsheets and records moved in cleanly." },
+    ],
+  },
+  "Workflow Automation": {
+    seoTitle: "Workflow & Business Process Automation",
+    seoDescription:
+      "Workflow and AI automation that removes repetitive manual work — connecting your tools, moving data and handling routine tasks automatically.",
+    lead: "Repetitive work,",
+    tail: "handled automatically",
+    body: "Hours disappear into copying data, chasing approvals and repeating the same steps. We design workflow and AI automation that connects your tools and handles routine work automatically — reliably, and with a clear record of every step.",
+    included: [
+      { title: "Process Audit", text: "The manual steps worth automating, identified and prioritised." },
+      { title: "Tool Integrations", text: "Apps, forms, sheets and databases connected end to end." },
+      { title: "AI Automation", text: "AI that reads, sorts, drafts and routes work where it helps." },
+      { title: "Approvals & Notifications", text: "The right people alerted at the right step." },
+      { title: "Monitoring", text: "Every run logged, with alerts if anything needs attention." },
+    ],
+  },
+  "AI-Powered Dashboards": {
+    seoTitle: "AI-Powered Business Dashboards",
+    seoDescription:
+      "Dashboards that bring your sales, marketing and operations data together — with AI summaries and alerts that surface what needs attention.",
+    lead: "Your business,",
+    tail: "in one clear view",
+    body: "Data scattered across tools makes decisions slower than they should be. We build dashboards that bring sales, marketing and operations together — with AI-generated summaries and alerts that surface what needs attention.",
+    included: [
+      { title: "Data Connections", text: "Sales, ads, finance and operations data brought together." },
+      { title: "KPI Design", text: "The few numbers that really matter, defined with you." },
+      { title: "AI Summaries", text: "Plain-language insights on what changed, and why." },
+      { title: "Alerts", text: "Notifications when a metric moves outside its range." },
+      { title: "Role-Based Views", text: "Leadership, managers and teams each see what they need." },
+    ],
+  },
+  "Custom Business Software": {
+    seoTitle: "Custom Business Software Development",
+    seoDescription:
+      "Purpose-built business software for problems off-the-shelf tools can’t solve — designed, developed and supported by Zenkai Media.",
+    lead: "Software,",
+    tail: "built for your problem",
+    body: "Some challenges don’t fit any product on the market. We design and develop purpose-built business software for your specific operational problem — secure, scalable and supported long after launch.",
+    included: [
+      { title: "Discovery & Scoping", text: "The problem, the users and the must-haves defined clearly." },
+      { title: "UX & Interface Design", text: "Software your team finds simple to use from day one." },
+      { title: "Development", text: "Secure, scalable web applications built in stages." },
+      { title: "AI Features", text: "AI built in where it saves real time or effort." },
+      { title: "Support & Growth", text: "Maintenance, improvements and new features as you scale." },
+    ],
+  },
 };
 
 export type SubServicePage = SubDetail & {

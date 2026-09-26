@@ -16,8 +16,8 @@ const CATEGORIES: { label: string; titles: string[] }[] = [
     titles: ["Performance Marketing", "Influencer Marketing"],
   },
   {
-    label: "Brand & Web",
-    titles: ["Branding & Design", "Web Development"],
+    label: "Brand & Technology",
+    titles: ["Branding & Design", "Web Development", "Custom AI Solutions"],
   },
 ];
 

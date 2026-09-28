@@ -26,7 +26,7 @@ function ArrowUpRight() {
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src="/assets/general/rightuparrow.webp"
-      alt=""
+      alt="Arrow"
       aria-hidden="true"
       className="h-3.5 w-3.5 shrink-0 object-contain opacity-60 transition-transform duration-300 [filter:brightness(0)_invert(1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
     />

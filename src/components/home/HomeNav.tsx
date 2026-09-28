@@ -157,7 +157,7 @@ export default function HomeNav() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logo1.png"
-              alt=""
+              alt="Zenkai Media logo"
               aria-hidden="true"
               style={{ filter: "invert(1)" }}
               className="h-[2.5rem] w-[2.5rem] select-none"

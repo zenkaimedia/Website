@@ -131,7 +131,8 @@ function WorkCard({ work }: { work: Work }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/general/rightuparrow.webp"
-            alt=""
+            alt="Arrow"
+            aria-hidden="true"
             className="h-3 w-3 [filter:brightness(0)_invert(1)]"
           />
         </span>

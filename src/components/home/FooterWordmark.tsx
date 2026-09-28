@@ -42,7 +42,7 @@ export default function FooterWordmark() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/assets/footerlogo/after.webp"
-        alt=""
+        alt="Zenkai Media"
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 block w-full transition-opacity duration-300 ease-out"
         style={{

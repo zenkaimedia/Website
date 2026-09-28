@@ -104,7 +104,7 @@ function NewsCard({ post, className = "" }: { post: Post; className?: string }) 
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={post.image}
-          alt=""
+          alt={post.title}
           aria-hidden="true"
           loading="lazy"
           className="h-full w-full object-cover"

@@ -24,12 +24,18 @@ export function generateStaticParams() {
   return WORK.map((w) => ({ slug: w.slug }));
 }
 
+/** Fallback meta description ≤ 155 chars, cut at the last full word. */
+function clampDescription(text: string, max = 155): string {
+  if (text.length <= max) return text;
+  return `${text.slice(0, max - 1).replace(/\s+\S*$/, "")}…`;
+}
+
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const work = getWork((await params).slug);
   if (!work) return {};
   return pageMetadata({
     title: `${work.title} Case Study — ${work.services[0]}`,
-    description: work.description.length > 160 ? `${work.description.slice(0, 157).trimEnd()}…` : work.description,
+    description: work.seoDescription ?? clampDescription(work.description),
     path: work.href,
     image: ogImage(`work-${work.slug}`),
   });

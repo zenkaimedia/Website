@@ -114,7 +114,7 @@ const DETAILS: Record<string, Detail> = {
     work: ["ponds", "zudo-app"],
   },
   "Branding & Design": {
-    seoTitle: "Branding & Design Agency — Brand Identity & Logo Design",
+    seoTitle: "Branding Agency — Brand Identity & Logo Design",
     seoDescription:
       "Brand identity, logo design and visual systems for businesses that want to be recognised. Strategy-led branding from Zenkai Media, Ahmedabad.",
     lead: "Identities that are clear,",
@@ -130,7 +130,7 @@ const DETAILS: Record<string, Detail> = {
     work: ["airblack", "ponds"],
   },
   "Web Development": {
-    seoTitle: "Web Development — Websites, E-commerce & Custom Software",
+    seoTitle: "Website & Custom Software Development",
     seoDescription:
       "Fast, conversion-focused websites, e-commerce stores and custom business software — including AI-powered tools and automation. Built by Zenkai Media.",
     lead: "Websites and software",

@@ -27,7 +27,7 @@ const SUB_DETAILS: Record<string, SubDetail> = {
   "Video Editing": {
     seoTitle: "Video Editing Services for Brands",
     seoDescription:
-      "Professional video editing for brands — story, pacing, colour, sound and motion, delivered ready for every platform. Short-form and long-form, by Zenkai Media.",
+      "Professional video editing for brands — story, pacing, colour, sound and motion, delivered ready for every platform. Short-form and long-form.",
     lead: "Footage,",
     tail: "shaped into stories",
     body: "Editing is where footage becomes a story. We structure, pace, grade and mix every cut so it holds attention and carries one clear message — from brand films to short-form edits built for the first three seconds.",
@@ -104,7 +104,7 @@ const SUB_DETAILS: Record<string, SubDetail> = {
   "AI Commercials": {
     seoTitle: "AI Commercials & AI Ad Film Production",
     seoDescription:
-      "Broadcast-quality commercials produced with generative AI and finished by real editors — bigger ideas, faster turnaround and more variations. By Zenkai Media.",
+      "Broadcast-quality commercials made with generative AI and finished by real editors — bigger ideas, faster turnaround and more variations.",
     lead: "Commercials,",
     tail: "without production limits",
     body: "Broadcast-quality commercials produced with generative AI and finished by our editors. Impossible locations, bigger ideas and multiple variations — in a fraction of the time and cost of a traditional shoot.",
@@ -226,7 +226,7 @@ const SUB_DETAILS: Record<string, SubDetail> = {
 
   /* ---------------------------------------------- Performance Marketing */
   "Meta Ads": {
-    seoTitle: "Meta Ads Agency — Facebook & Instagram Advertising",
+    seoTitle: "Meta Ads Agency — Facebook & Instagram Ads",
     seoDescription:
       "Facebook and Instagram ads built on clean tracking, structured testing and strong creative — find what converts, then scale it. Meta Ads by Zenkai Media.",
     lead: "Meta campaigns",
@@ -352,7 +352,7 @@ const SUB_DETAILS: Record<string, SubDetail> = {
   "Brand Identity": {
     seoTitle: "Brand Identity Design",
     seoDescription:
-      "Complete brand identity systems — positioning, logo, colour, typography and guidelines — that set you apart and stay consistent everywhere. By Zenkai Media.",
+      "Complete brand identity systems — positioning, logo, colour, typography and guidelines — that set you apart and stay consistent everywhere.",
     lead: "Identity,",
     tail: "with purpose",
     body: "A complete identity that expresses who you are and sets you apart. We build one cohesive system — from positioning and logo to colour and typography — that works across every touchpoint.",
@@ -442,7 +442,7 @@ const SUB_DETAILS: Record<string, SubDetail> = {
     ],
   },
   "E-commerce Stores": {
-    seoTitle: "E-commerce Website Development — Shopify & Custom",
+    seoTitle: "E-commerce Website Development",
     seoDescription:
       "Online stores on Shopify and custom platforms, designed for smooth shopping and strong conversion — from catalogue setup to payments and launch.",
     lead: "Stores,",

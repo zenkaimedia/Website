@@ -13,6 +13,8 @@ type WorkInput = {
   /** Cover image — used on cards and as the first gallery image. */
   image: string;
   description: string;
+  /** Search description (~120–155 chars); falls back to a trimmed description. */
+  seoDescription?: string;
   location: string;
   industry: string;
   /** Tags on the mobile home card and the project page. */
@@ -31,6 +33,8 @@ const INPUT: WorkInput[] = [
     image: "/assets/portfolio/airblack.webp",
     description:
       "Airblack is a leading skilling academy helping aspiring professionals build industry-ready skills and create meaningful career opportunities. We developed a creative production approach that captures the energy of learning, the credibility of expert-led education, and the ambition of a growing community. The visual direction combines human stories, modern aesthetics, and purposeful storytelling to reflect Airblack’s role in shaping the next generation of professionals.",
+    seoDescription:
+      "Creative production for Airblack, a leading skilling academy — human stories and modern, purposeful visuals built for a growing learning community.",
     location: "India",
     industry: "EdTech",
     services: ["Creative Production"],
@@ -52,6 +56,8 @@ const INPUT: WorkInput[] = [
     image: "/assets/portfolio/ponds.webp",
     description:
       "POND’S is a skincare brand with a long-standing focus on beauty, skin health, and science. We developed a cinematic visual direction for the brand, translating its product identity into refined, product-led imagery through controlled lighting, elegant compositions, and soft beauty-inspired details.",
+    seoDescription:
+      "A cinematic, product-led visual direction for POND’S — refined skincare imagery with controlled lighting, elegant compositions and soft beauty details.",
     location: "INDIA",
     industry: "BEAUTY & SKINCARE",
     services: ["Branding & Design", "Creative Production"],
@@ -62,6 +68,8 @@ const INPUT: WorkInput[] = [
     image: "/assets/portfolio/zudoapp.webp",
     description:
       "Zudo App is a learning platform focused on making practical skills easier to learn, understand, and apply. We worked on bringing its creator-first learning experience to life through engaging digital content, combining sharp storytelling, modern visual direction, and AI-driven creative production to create content that feels simple, relevant, and built for today’s learners.",
+    seoDescription:
+      "Creator-first learning content for Zudo App — sharp storytelling, modern visuals and AI-driven creative production built for today’s learners.",
     location: "India",
     industry: "EdTech",
     services: ["Creative Production", "AI Creative Studio"],
@@ -72,6 +80,8 @@ const INPUT: WorkInput[] = [
     image: "/assets/portfolio/odesongs.webp",
     description:
       "Ode Songs is a SaaS platform that turns personal memories and stories into original, personalized songs. We developed creative concepts and AI-led visual content to translate the emotional nature of the product into cinematic, engaging short-form experiences built for digital audiences.",
+    seoDescription:
+      "Creative concepts and AI-led visual content for Ode Songs, a SaaS platform turning personal stories into songs — cinematic, emotional short-form work.",
     location: "Netherlands",
     industry: "SaaS / AI",
     services: ["Creative Production", "AI Creative Studio"],

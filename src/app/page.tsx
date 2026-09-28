@@ -21,7 +21,7 @@ import FooterWordmark from "@/components/home/FooterWordmark";
 export const metadata: Metadata = pageMetadata({
   title: "Zenkai Media — Creative, Video & AI Production Agency in India",
   description:
-    "Creative growth agency from Ahmedabad, India, working with brands worldwide — creative and video production, AI creative, branding, web and performance marketing.",
+    "Creative growth agency from Ahmedabad, India, working worldwide — creative and video production, AI creative, branding, web and performance marketing.",
   path: "/",
   absoluteTitle: true,
 });

@@ -11,6 +11,8 @@ export type Post = {
   image: string;
   /** Short standfirst under the title. */
   excerpt: string;
+  /** Search description (~120–155 chars); falls back to the excerpt. */
+  seoDescription?: string;
   /** Long-form body, rendered on the article page. */
   body: Section[];
   /** Link target — the individual article. */
@@ -27,6 +29,8 @@ export const POSTS: Post[] = [
     href: "/insights/building-brands-from-within",
     excerpt:
       "Why meaningful brands are built from depth, not just design — and how that approach creates long-term impact.",
+    seoDescription:
+      "Why meaningful brands are built from depth, not just design — how understanding character, values and purpose creates branding with long-term impact.",
     body: [
       {
         heading: "Where Branding Truly Begins",
@@ -84,6 +88,8 @@ export const POSTS: Post[] = [
     href: "/insights/how-to-choose-a-brand-name-that-lasts",
     excerpt:
       "A name is the first word your brand ever says. Here's how to choose one built to outlast trends.",
+    seoDescription:
+      "A name is the first word your brand ever says. A practical guide to choosing a brand name that is distinctive, ownable and built to outlast trends.",
     body: [
       {
         heading: "A Name Is a Promise, Not a Label",

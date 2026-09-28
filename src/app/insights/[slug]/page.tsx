@@ -34,7 +34,7 @@ export async function generateMetadata({
   if (!post) return {};
   return pageMetadata({
     title: post.title,
-    description: post.excerpt,
+    description: post.seoDescription ?? post.excerpt,
     path: post.href,
     image: ogImage(`post-${post.slug}`),
     type: "article",

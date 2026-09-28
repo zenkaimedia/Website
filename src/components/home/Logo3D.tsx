@@ -187,6 +187,30 @@ export default function Logo3D({
     };
     animate();
 
+    // ---- Only render while visible ----
+    // Stop the frame loop when the hero is scrolled out of view or the tab is
+    // in the background, and resume when it comes back — no GPU/CPU work for
+    // a logo nobody can see.
+    let inView = true;
+    const setRunning = (on: boolean) => {
+      if (on && !animationId) animate();
+      else if (!on && animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = 0;
+      }
+    };
+    const syncRunning = () => setRunning(inView && !document.hidden);
+    const io = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      syncRunning();
+    });
+    io.observe(mount);
+    document.addEventListener("visibilitychange", syncRunning);
+    cleanupFns.push(() => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", syncRunning);
+    });
+
     // ---- Resize handling ----
     const handleResize = () => {
       const w = mount.clientWidth || 1;

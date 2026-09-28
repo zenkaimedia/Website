@@ -86,9 +86,9 @@ function Card({ post }: { post: Post }) {
         </span>
       </motion.div>
 
-      <h3 className="mt-4 font-display text-[clamp(1.05rem,4.5vw,1.5rem)] font-bold leading-snug text-black">
+      <h2 className="mt-4 font-display text-[clamp(1.05rem,4.5vw,1.5rem)] font-bold leading-snug text-black">
         {post.title}
-      </h3>
+      </h2>
     </a>
   );
 }

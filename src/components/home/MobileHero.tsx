@@ -105,9 +105,9 @@ export default function MobileHero({ className = "" }: { className?: string }) {
         <p className="font-body text-[12px] leading-[16px] tracking-[0.1em] text-white/60">
           0{active + 1} / 0{SLIDES.length}
         </p>
-        <h2 className="mt-[4px] font-display text-[24px] font-normal leading-[32px] tracking-normal text-white">
+        <p className="mt-[4px] font-display text-[24px] font-normal leading-[32px] tracking-normal text-white">
           {SLIDES[active].title}
-        </h2>
+        </p>
 
         {/* Segmented progress bar */}
         <div className="mt-[20px] flex gap-[8px]">

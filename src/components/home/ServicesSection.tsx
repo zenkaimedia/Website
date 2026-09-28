@@ -140,9 +140,9 @@ export default function ServicesSection() {
       <PageContainer className="max-md:px-[20px]! md:max-w-none! md:px-[6rem]!">
         {/* Label per reference: 16px regular grey caps on mobile, 19px on
             desktop, no tracking. */}
-        <p className="mb-8 font-mono text-[0.6875rem] uppercase tracking-[0.3em] text-black/45 max-md:mb-[22px] max-md:font-body max-md:text-[16px] max-md:leading-[16px] max-md:tracking-normal max-md:text-[#909090] md:mb-[0.375rem] md:font-body md:text-[1.2rem] md:leading-[1.8rem] md:tracking-normal md:text-[#909090]">
+        <h2 className="mb-8 font-mono text-[0.6875rem] font-normal uppercase tracking-[0.3em] text-black/45 max-md:mb-[22px] max-md:font-body max-md:text-[16px] max-md:leading-[16px] max-md:tracking-normal max-md:text-[#909090] md:mb-[0.375rem] md:font-body md:text-[1.2rem] md:leading-[1.8rem] md:tracking-normal md:text-[#909090]">
           Our Services
-        </p>
+        </h2>
 
         <motion.div
           variants={gridVariants}

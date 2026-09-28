@@ -54,6 +54,8 @@ function Card({ work }: { work: Work }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={work.image}
+          srcSet={work.imageSmall ? `${work.imageSmall} 800w, ${work.image} 1600w` : undefined}
+          sizes="(max-width: 767px) 100vw, 50vw"
           alt={work.title}
           loading="lazy"
           className="flip-photo aspect-[3/2] w-full object-cover"

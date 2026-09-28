@@ -87,6 +87,8 @@ export default function AboutShowcase() {
             <source media={DESKTOP} srcSet={BLANK_IMG} />
             <img
               src={MOBILE_SHOWCASE}
+              srcSet="/assets/portfolio/mobileshowcaseimg-600.webp 600w, /assets/portfolio/mobileshowcaseimg.webp 903w"
+              sizes="100vw"
               loading="lazy"
               alt="Zenkai work showcase"
               className="flip-photo aspect-[2/3] w-full object-cover object-center"

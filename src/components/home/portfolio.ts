@@ -12,6 +12,9 @@ type WorkInput = {
   title: string;
   /** Cover image — used on cards and as the first gallery image. */
   image: string;
+  /** Optional ~800px-wide copy of the cover for cards on small screens
+      (served via srcset; cards fall back to `image` when absent). */
+  imageSmall?: string;
   description: string;
   /** Search description (~120–155 chars); falls back to a trimmed description. */
   seoDescription?: string;
@@ -31,6 +34,7 @@ const INPUT: WorkInput[] = [
     slug: "airblack",
     title: "Airblack",
     image: "/assets/portfolio/airblack.webp",
+    imageSmall: "/assets/portfolio/airblack-800.webp",
     description:
       "Airblack is a leading skilling academy helping aspiring professionals build industry-ready skills and create meaningful career opportunities. We developed a creative production approach that captures the energy of learning, the credibility of expert-led education, and the ambition of a growing community. The visual direction combines human stories, modern aesthetics, and purposeful storytelling to reflect Airblack’s role in shaping the next generation of professionals.",
     seoDescription:
@@ -54,6 +58,7 @@ const INPUT: WorkInput[] = [
     slug: "ponds",
     title: "POND’S",
     image: "/assets/portfolio/ponds.webp",
+    imageSmall: "/assets/portfolio/ponds-800.webp",
     description:
       "POND’S is a skincare brand with a long-standing focus on beauty, skin health, and science. We developed a cinematic visual direction for the brand, translating its product identity into refined, product-led imagery through controlled lighting, elegant compositions, and soft beauty-inspired details.",
     seoDescription:
@@ -66,6 +71,7 @@ const INPUT: WorkInput[] = [
     slug: "zudo-app",
     title: "Zudo App",
     image: "/assets/portfolio/zudoapp.webp",
+    imageSmall: "/assets/portfolio/zudoapp-800.webp",
     description:
       "Zudo App is a learning platform focused on making practical skills easier to learn, understand, and apply. We worked on bringing its creator-first learning experience to life through engaging digital content, combining sharp storytelling, modern visual direction, and AI-driven creative production to create content that feels simple, relevant, and built for today’s learners.",
     seoDescription:
@@ -78,6 +84,7 @@ const INPUT: WorkInput[] = [
     slug: "ode-songs",
     title: "Ode Songs",
     image: "/assets/portfolio/odesongs.webp",
+    imageSmall: "/assets/portfolio/odesongs-800.webp",
     description:
       "Ode Songs is a SaaS platform that turns personal memories and stories into original, personalized songs. We developed creative concepts and AI-led visual content to translate the emotional nature of the product into cinematic, engaging short-form experiences built for digital audiences.",
     seoDescription:

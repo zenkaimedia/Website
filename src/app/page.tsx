@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import HomeNav from "@/components/home/HomeNav";
 import { pageMetadata } from "@/lib/seo";
 import ContactForm from "@/components/home/ContactForm";
-import Logo3D from "@/components/home/Logo3D";
+import Logo3D from "@/components/home/Logo3DDesktop";
 import MobileHero from "@/components/home/MobileHero";
 import ServicesSection from "@/components/home/ServicesSection";
 import ApproachShowcase from "@/components/home/ApproachShowcase";

@@ -8,17 +8,23 @@ import { BLANK_IMG, DESKTOP } from "./mediaOnly";
 const SLIDES = [
   {
     image: "/assets/mobile/herosection/creativeproduction.webp",
+    small: "/assets/mobile/herosection/creativeproduction-800.webp",
     title: "Creative Production",
   },
   {
     image: "/assets/mobile/herosection/aicreativestudio.webp",
+    small: "/assets/mobile/herosection/aicreativestudio-800.webp",
     title: "AI Creative Studio",
   },
   {
     image: "/assets/mobile/herosection/brandanddesign.webp",
+    small: "/assets/mobile/herosection/brandanddesign-800.webp",
     title: "Branding & Design",
   },
 ];
+
+/* 800w for typical phones, the full 1261w crop for high-density screens. */
+const srcSet = (s: (typeof SLIDES)[number]) => `${s.small} 800w, ${s.image} 1261w`;
 
 const DURATION = 4500; // ms per slide (matches the progress-bar animation)
 
@@ -51,6 +57,19 @@ export default function MobileHero({ className = "" }: { className?: string }) {
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
+      {/* The first slide is the page's largest paint on phones: preload it
+          (phones only) at high priority. React hoists this into <head>; an
+          <img> inside <picture> isn't auto-preloaded otherwise. */}
+      <link
+        rel="preload"
+        as="image"
+        href={SLIDES[0].image}
+        imageSrcSet={srcSet(SLIDES[0])}
+        imageSizes="100vw"
+        media="(max-width: 767.98px)"
+        fetchPriority="high"
+      />
+
       {/* Slides */}
       {SLIDES.map((s, i) => (
         <div
@@ -64,7 +83,10 @@ export default function MobileHero({ className = "" }: { className?: string }) {
             <source media={DESKTOP} srcSet={BLANK_IMG} />
             <img
               src={s.image}
+              srcSet={srcSet(s)}
+              sizes="100vw"
               alt={s.title}
+              fetchPriority={i === 0 ? "high" : "low"}
               className="h-full w-full object-cover"
               draggable={false}
             />

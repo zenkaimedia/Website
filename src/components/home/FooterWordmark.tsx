@@ -35,16 +35,26 @@ export default function FooterWordmark() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/assets/footerlogo/before.webp"
+        srcSet="/assets/footerlogo/before-800.webp 800w, /assets/footerlogo/before.webp 1920w"
+        sizes="100vw"
+        width={1920}
+        height={504}
+        loading="lazy"
         alt="Zenkai"
-        className="block w-full opacity-25"
+        className="block h-auto w-full opacity-25"
       />
       {/* Brighter reveal, masked to a spotlight at the cursor */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/assets/footerlogo/after.webp"
+        srcSet="/assets/footerlogo/after-800.webp 800w, /assets/footerlogo/after.webp 1920w"
+        sizes="100vw"
+        width={1920}
+        height={504}
+        loading="lazy"
         alt="Zenkai Media"
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 block w-full transition-opacity duration-300 ease-out"
+        className="pointer-events-none absolute inset-0 block h-auto w-full transition-opacity duration-300 ease-out"
         style={{
           opacity: hover ? 0.28 : 0,
           WebkitMaskImage: spotlight,

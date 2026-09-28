@@ -169,7 +169,7 @@ export default function HomeNav() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/mobile/logo/logo.png"
+              src="/assets/mobile/logo/logo-240.webp"
               alt="Zenkai Media"
               className="h-[clamp(24px,7.05vw,32px)] w-auto select-none"
             />
@@ -261,6 +261,7 @@ export default function HomeNav() {
             onMouseEnter={openServices}
             onMouseLeave={scheduleCloseServices}
             aria-hidden={!servicesOpen}
+            inert={!servicesOpen}
             className={`grid transition-[grid-template-rows] duration-300 ${EASE} ${servicesOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
               }`}
           >
@@ -336,7 +337,7 @@ export default function HomeNav() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/mobile/logo/logo.png"
+              src="/assets/mobile/logo/logo-240.webp"
               alt="Zenkai Media"
               className="h-[clamp(24px,7.05vw,32px)] w-auto select-none"
             />
@@ -357,6 +358,7 @@ export default function HomeNav() {
           {/* Main nav */}
           <nav
             aria-hidden={mobileSub}
+            inert={mobileSub}
             className={`absolute inset-0 flex flex-col ${M_GAP} transition-all duration-300 ${EASE} ${mobileSub ? "pointer-events-none -translate-x-6 opacity-0" : "translate-x-0 opacity-100"
               }`}
           >
@@ -398,6 +400,7 @@ export default function HomeNav() {
           {/* Services submenu */}
           <div
             aria-hidden={!mobileSub}
+            inert={!mobileSub}
             className={`absolute inset-0 flex flex-col ${M_GAP} overflow-y-auto transition-all duration-300 ${EASE} ${mobileSub ? "translate-x-0 opacity-100" : "pointer-events-none translate-x-6 opacity-0"
               }`}
           >

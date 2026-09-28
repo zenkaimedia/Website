@@ -70,6 +70,8 @@ function WorkCard({ work }: { work: Work }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={work.image}
+          srcSet={work.imageSmall ? `${work.imageSmall} 800w, ${work.image} 1600w` : undefined}
+          sizes="(max-width: 767px) 100vw, 45vw"
           alt={work.title}
           loading="lazy"
           className="flip-photo absolute inset-0 h-full w-full object-cover"

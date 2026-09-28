@@ -124,6 +124,7 @@ function ServiceCard({ service }: { service: Service }) {
           className="absolute bottom-[2.25rem] right-[2.375rem] flex h-[2.5rem] items-center font-body text-[1rem] text-white underline decoration-white/80 underline-offset-[0.2rem] transition-colors hover:decoration-white"
         >
           See More
+          <span className="sr-only"> about {service.title}</span>
         </a>
       </div>
     </motion.article>

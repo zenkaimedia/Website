@@ -55,6 +55,7 @@ function Row({ logos, reverse }: { logos: Logo[]; reverse?: boolean }) {
             <img
               src={logo.src}
               alt={logo.alt}
+              loading="lazy"
               className="flip-photo h-[64px] w-[140px] rounded-[8px] bg-white object-contain p-[10px] md:h-[6rem] md:w-[13rem] md:rounded-[0.75rem] md:p-[1rem]"
             />
           </li>

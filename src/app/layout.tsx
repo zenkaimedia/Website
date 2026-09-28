@@ -94,14 +94,14 @@ export default function RootLayout({
         {children}
         <FloatingCTA />
 
-        {/* Google Analytics 4 — loads after the page is interactive. Page
+        {/* Google Analytics 4 — loads once the page is idle (keeps it off the critical path). Page
             views on client-side navigation are picked up by GA4's enhanced
             measurement (browser history events). */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="ga4" strategy="afterInteractive">
+        <Script id="ga4" strategy="lazyOnload">
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`}
         </Script>
       </body>

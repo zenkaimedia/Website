@@ -274,7 +274,7 @@ export default function ServicesPage() {
               {s.label}
             </a>
           ))}
-          <a href="mailto:workwithzenkai@gmail.com" className="transition-colors hover:text-white">
+          <a href="mailto:contact@zenkaimedia.in" className="transition-colors hover:text-white">
             Mail
           </a>
         </PageContainer>

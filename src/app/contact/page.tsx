@@ -42,9 +42,9 @@ export default function ContactPage() {
 
             <div className="mt-8 flex flex-wrap gap-2 md:mt-auto md:gap-3">
               {/* Short label on mobile so all four pills fit on one row */}
-              <a href="mailto:workwithzenkai@gmail.com" className={PILL}>
+              <a href="mailto:contact@zenkaimedia.in" className={PILL}>
                 <span className="md:hidden">Mail</span>
-                <span className="hidden md:inline">workwithzenkai@gmail.com</span>
+                <span className="hidden md:inline">contact@zenkaimedia.in</span>
               </a>
               {SOCIALS.map((s) => (
                 <a
